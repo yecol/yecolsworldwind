@@ -52,6 +52,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
         try
         {
             this.wwd = ((WorldWindowGLDrawable) WorldWind.createConfigurationComponent(AVKey.WORLD_WINDOW_CLASS_NAME));
+            //该AVKey从config.worldwind.xml中读取，值为gov.nasa.worldwind.WorldWindowGLAutoDrawable。
             this.wwd.initDrawable(this);
             this.wwd.initTextureCache(createTextureCache());
             this.createView();
