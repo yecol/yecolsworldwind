@@ -82,12 +82,17 @@ public class Configuration // Singleton
     }
 
     private final Properties properties;
-    private final ArrayList<Document> configDocs = new ArrayList<Document>();
+    private final ArrayList<Document> configDocs = new ArrayList<Document>();//配置文件列表
 
     /** Private constructor invoked only internally. */
     private Configuration()
-    {
+   {
+    	//Process1：生成 properties
+    	//Process2：加载 CONFIG_APP_DOCUMENT_KEY  文件
+    	//Process3：加载 CONFIG_WW_DOCUMENT_KEY   文件
+    	//Process4：加载 CONFIG_FILE_PROPERTY_KEY 文件
         this.properties = initializeDefaults();
+        //基本初始化
 
         // Load the app's configuration if there is one
         try
@@ -123,10 +128,12 @@ public class Configuration // Singleton
         // To support old-style configuration, read an existing config properties file and give the properties
         // specified there precedence.
         this.initializeCustom();
+        //加载所有客户定义的初始化，其中用户的配置文件数组configDocs通过文件流的形式依次输入。
     }
 
     private void loadConfigDoc(String configLocation)
     {
+    	//从文件读取配置。
         if (!WWUtil.isEmpty(configLocation))
         {
             Document doc = WWXML.openDocument(configLocation);
@@ -153,6 +160,7 @@ public class Configuration // Singleton
 
     private void loadConfigProperties(Document doc)
     {
+    	//从doc这个xml文件中读取所有属性名值对添加到this.properties.
         try
         {
             XPath xpath = WWXML.makeXPath();
@@ -180,6 +188,8 @@ public class Configuration // Singleton
 
     private Properties initializeDefaults()
     {
+    	//返回一个属性（AV），根据时区设置初始化的经度。
+    	
         Properties defaults = new Properties();
         java.util.TimeZone tz = java.util.Calendar.getInstance().getTimeZone();
         if (tz != null)
