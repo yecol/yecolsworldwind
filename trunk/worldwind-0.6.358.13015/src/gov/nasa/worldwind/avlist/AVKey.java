@@ -9,10 +9,12 @@ package gov.nasa.worldwind.avlist;
 /**
  * @author Tom Gaskins
  * @version $Id: AVKey.java 13005 2010-01-14 00:30:41Z dcollins $
+ * @comments yecol 2010.4.6
  */
 public interface AVKey // TODO: Eliminate unused constants, if any
 {
     // NOTE: Keep all keys in alphabetical order except where noted
+	//字母序常量表，值为配置文件中的名。
 
     // Direction constants
     final String NORTHWEST = "gov.nasa.worldwind.layers.ViewControlsLayer.NorthWest";
