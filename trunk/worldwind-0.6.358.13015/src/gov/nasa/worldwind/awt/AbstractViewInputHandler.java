@@ -18,6 +18,7 @@ import java.awt.event.*;
 /**
  * @author dcollins
  * @version $Id: ViewInputHandler.java 8975 2009-02-24 18:38:35Z dcollins $
+ * @comments 一些基本的监听实现，包括get/set wwd、View等一些元素。得到键鼠值。yecol.2010.4.8
  */
 public abstract class AbstractViewInputHandler implements ViewInputHandler, java.beans.PropertyChangeListener
 {

@@ -14,6 +14,7 @@ import java.awt.event.*;
 /**
  * @author dcollins
  * @version $Id: ViewInputHandler.java 12568 2009-09-08 18:36:58Z jterhorst $
+ * @comments 一个视图输入句柄的借口。拓展了键盘监听、鼠标监听、鼠标移动监听、鼠标滚轮监听、tab键监听。yecol.2010.4.8
  */
 public interface ViewInputHandler
     extends KeyListener, MouseListener, MouseMotionListener, MouseWheelListener, FocusListener

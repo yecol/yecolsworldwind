@@ -11,12 +11,13 @@ import gov.nasa.worldwind.util.*;
 /**
  * @author tag
  * @version $Id: Position.java 12876 2009-12-09 21:48:41Z dcollins $
+ * @comments 三维坐标定义函数。比LatLon多了高度。yecol.2010.4.8.
  */
 public class Position extends LatLon
 {
     public static final Position ZERO = new Position(Angle.ZERO, Angle.ZERO, 0d);
 
-    public final double elevation;
+    public final double elevation;//高度
 
     public static Position fromRadians(double latitude, double longitude, double elevation)
     {

@@ -16,13 +16,14 @@ import gov.nasa.worldwind.util.*;
  *
  * @author Tom Gaskins
  * @version $Id: LatLon.java 12876 2009-12-09 21:48:41Z dcollins $
+ * @comments 二维点类，平面坐标点。yecol.2010.4.7
  */
 public class LatLon
 {
     public static final LatLon ZERO = new LatLon(Angle.ZERO, Angle.ZERO);
 
-    public final Angle latitude;
-    public final Angle longitude;
+    public final Angle latitude;//纬度：-90to90
+    public final Angle longitude;//经度：-180to180
 
     /**
      * Factor method for obtaining a new <code>LatLon</code> from two angles expressed in radians.
@@ -34,7 +35,7 @@ public class LatLon
     public static LatLon fromRadians(double latitude, double longitude)
     {
         return new LatLon(Math.toDegrees(latitude), Math.toDegrees(longitude));
-    }
+    }//弧度to角度
 
     /**
      * Factory method for obtaining a new <code>LatLon</code> from two angles expressed in degrees.
@@ -121,6 +122,11 @@ public class LatLon
      */
     public static LatLon interpolate(double amount, LatLon value1, LatLon value2)
     {
+    	//直线插点。在value1和value2中间。其中amount为权重值。
+    	//如果 amount<=0 interpolate=value1;
+    	//如果 amount>=1 interpolate=value2;
+    	//0.5 中点。   
+    	
         if (value1 == null || value2 == null)
         {
             String message = Logging.getMessage("nullValue.LatLonIsNull");
@@ -157,6 +163,7 @@ public class LatLon
      */
     public static LatLon interpolateGreatCircle(double amount, LatLon value1, LatLon value2)
     {
+    	//球面插点
         if (value1 == null || value2 == null)
         {
             String message = Logging.getMessage("nullValue.LatLonIsNull");
@@ -167,10 +174,10 @@ public class LatLon
         if (LatLon.equals(value1, value2))
             return value1;
 
-        double t = WWMath.clamp(amount, 0d, 1d);
-        Angle azimuth = LatLon.greatCircleAzimuth(value1, value2);
-        Angle distance = LatLon.greatCircleDistance(value1, value2);
-        Angle pathLength = Angle.fromDegrees(t * distance.degrees);
+        double t = WWMath.clamp(amount, 0d, 1d);//约束 0<=amount<=1
+        Angle azimuth = LatLon.greatCircleAzimuth(value1, value2);//地平角。
+        Angle distance = LatLon.greatCircleDistance(value1, value2);//
+        Angle pathLength = Angle.fromDegrees(t * distance.degrees);//圆弧上距离
 
         return LatLon.greatCircleEndPosition(value1, azimuth, pathLength);
     }
@@ -207,7 +214,7 @@ public class LatLon
         Angle distance = LatLon.rhumbDistance(value1, value2);
         Angle pathLength = Angle.fromDegrees(t * distance.degrees);
 
-        return LatLon.rhumbEndPosition(value1, azimuth, pathLength);
+        return LatLon.rhumbEndPosition(value1, azimuth, pathLength);//恒向线距
     }
 
     /**
@@ -223,6 +230,9 @@ public class LatLon
      */
     public static Angle greatCircleDistance(LatLon p1, LatLon p2)
     {
+    	//返回一个角度值，该值表示在大圆周上p1到p2的角度。
+    	//该值换算成弧度时也表示两点的距离
+    	//该值×半径=弧度值
         if ((p1 == null) || (p2 == null))
         {
             String message = Logging.getMessage("nullValue.LatLonIsNull");
@@ -259,6 +269,8 @@ public class LatLon
      */
     public static Angle greatCircleAzimuth(LatLon p1, LatLon p2)
     {
+    	//返回p1到p2的地平角
+    	//地平角：从北极往下看，顺时钟方向。
         if ((p1 == null) || (p2 == null))
         {
             String message = Logging.getMessage("nullValue.LatLonIsNull");
@@ -296,6 +308,7 @@ public class LatLon
      */
     public static LatLon greatCircleEndPosition(LatLon p, Angle greatCircleAzimuth, Angle pathLength)
     {
+    	//返回终点。
         if (p == null)
         {
             String message = Logging.getMessage("nullValue.LatLonIsNull");
