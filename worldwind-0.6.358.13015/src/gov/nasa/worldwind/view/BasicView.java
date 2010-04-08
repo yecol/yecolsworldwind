@@ -39,7 +39,7 @@ public class BasicView extends WWObjectImpl implements View
     //   default values to fall back on.
     protected double nearClipDistance = MINIMUM_NEAR_DISTANCE;
     protected double farClipDistance = MINIMUM_FAR_DISTANCE;
-    protected Matrix modelview = Matrix.IDENTITY;
+    protected Matrix modelview = Matrix.IDENTITY;//初始化，4*4,对角线为1，其他为0。
     protected Matrix modelviewInv = Matrix.IDENTITY;
     protected Matrix projection = Matrix.IDENTITY;
     protected java.awt.Rectangle viewport = new java.awt.Rectangle();

@@ -19,7 +19,7 @@ import gov.nasa.worldwind.util.Logging;
  */
 public class OrbitViewCollisionSupport
 {
-    private double collisionThreshold;
+    private double collisionThreshold;//Åö×²ÃÅÏÞ
     private int numIterations;
 
     public OrbitViewCollisionSupport()

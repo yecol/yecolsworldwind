@@ -34,11 +34,11 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
 
     static
     {
-        caps.setAlphaBits(8);
-        caps.setRedBits(8);
+        caps.setAlphaBits(8);//八位透明度
+        caps.setRedBits(8);//色值
         caps.setGreenBits(8);
         caps.setBlueBits(8);
-        caps.setDepthBits(24);
+        caps.setDepthBits(24);//色深
     }
 
     private final WorldWindowGLDrawable wwd; // WorldWindow interface delegates to wwd
@@ -162,6 +162,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
     private void createView()
     {
         this.setView((View) WorldWind.createConfigurationComponent(AVKey.VIEW_CLASS_NAME));
+        //将一个gov.nasa.worldwind.view.orbit.BasicOrbitView类初始化，赋值给this。
     }
 
     private void createDefaultInputHandler()

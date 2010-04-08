@@ -13,6 +13,7 @@ import java.util.*;
 /**
  * @author dcollins
  * @version $Id: ViewInputAttributes.java 12530 2009-08-29 17:55:54Z jterhorst $
+ * 
  */
 public class ViewInputAttributes
 {

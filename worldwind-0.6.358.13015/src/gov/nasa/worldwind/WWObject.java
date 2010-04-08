@@ -15,6 +15,7 @@ import gov.nasa.worldwind.avlist.AVList;
  *
  * @author Tom Gaskins
  * @version $Id: WWObject.java 2422 2007-07-25 23:07:49Z tgaskins $
+ * @comments 一个具备属性改变事件监听的接口。yecol.2010.4.7.12.39 
  */
 public interface WWObject extends AVList, java.beans.PropertyChangeListener
 {
