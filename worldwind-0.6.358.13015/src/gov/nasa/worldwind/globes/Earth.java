@@ -11,6 +11,7 @@ import gov.nasa.worldwind.avlist.AVKey;
 /**
  * @author Tom Gaskins
  * @version $Id: Earth.java 13011 2010-01-15 19:29:50Z dcollins $
+ * @comments 初始化地球球体，传值长短半径通过调用父类：椭圆球体。yecol.210.4.9.
  */
 
 public class Earth extends EllipsoidalGlobe
