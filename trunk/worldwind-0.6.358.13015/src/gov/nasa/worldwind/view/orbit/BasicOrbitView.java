@@ -62,7 +62,7 @@ public class BasicOrbitView extends BasicView implements OrbitView
 
         Double initAltitude = Configuration.getDoubleValue(AVKey.INITIAL_ALTITUDE);
         if (initAltitude != null)
-            setZoom(initAltitude);
+            setZoom(initAltitude);//通过海拔高度来设置缩放Zoom
 
         Double initFov = Configuration.getDoubleValue(AVKey.FOV);
         if (initFov != null)

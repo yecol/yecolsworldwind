@@ -21,8 +21,8 @@ import java.util.List;
  */
 public class EllipsoidalGlobe extends WWObjectImpl implements Globe
 {
-    protected final double equatorialRadius;
-    protected final double polarRadius;
+    protected final double equatorialRadius;//类赤道圈半径
+    protected final double polarRadius;//类经度圈半径//Apple 苹果标注
     protected final double es;
     private final Vec4 center;
     private ElevationModel elevationModel;
@@ -35,7 +35,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
         this.es = es; // assume it's consistent with the two radii
         this.center = Vec4.ZERO;
         this.elevationModel = em;
-        this.tessellator = (Tessellator) WorldWind.createConfigurationComponent(AVKey.TESSELLATOR_CLASS_NAME);
+        this.tessellator = (Tessellator) WorldWind.createConfigurationComponent(AVKey.TESSELLATOR_CLASS_NAME);//加载地形
     }
 
     public EllipsoidalGlobe(double equatorialRadius, double polarRadius, double es, ElevationModel em, Vec4 center)
@@ -142,6 +142,7 @@ public class EllipsoidalGlobe extends WWObjectImpl implements Globe
 
     public double getRadiusAt(Angle latitude, Angle longitude)
     {
+    	//得到特定点的半径
         if (latitude == null || longitude == null)
         {
             String msg = Logging.getMessage("nullValue.AngleIsNull");
