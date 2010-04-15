@@ -24,6 +24,9 @@ import java.util.logging.Level;
 /**
  * @author tag
  * @version $Id: AbstractSceneController.java 13005 2010-01-14 00:30:41Z dcollins $
+ * @comments 一个场景控制器，包含几个关键的函数，如draw，doRepaint等。
+ * 有一个Model和View的对象，控制着帧的生成以及每帧中图层的渲染等。
+ * yecol.2010.4.15.
  */
 public abstract class AbstractSceneController extends WWObjectImpl implements SceneController
 {
@@ -98,6 +101,7 @@ public abstract class AbstractSceneController extends WWObjectImpl implements Sc
 
     public void setModel(Model model)
     {
+    	//设置Model,包括新Model上监听器的重新注册
         if (this.model != null)
             this.model.removePropertyChangeListener(this);
         if (model != null)

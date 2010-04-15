@@ -26,6 +26,7 @@ import java.util.*;
  *
  * @author Tom Gaskins
  * @version $Id: WorldWindowImpl.java 7649 2008-11-15 07:11:30Z tgaskins $
+ * @comments World Window 基本窗口及其函数。其中sceneController从配置文件生成，包含Model和View。yecol.2010.4.13.
  */
 public class WorldWindowImpl extends WWObjectImpl implements WorldWindow
 {
@@ -38,6 +39,7 @@ public class WorldWindowImpl extends WWObjectImpl implements WorldWindow
     {
         this.sceneController = (SceneController) WorldWind.createConfigurationComponent(
             AVKey.SCENE_CONTROLLER_CLASS_NAME);
+        //gov.nasa.worldwind.BasicSceneController
     }
 
     /**

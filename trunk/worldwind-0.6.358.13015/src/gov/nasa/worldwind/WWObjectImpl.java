@@ -15,6 +15,7 @@ import gov.nasa.worldwind.util.*;
  *
  * @author Tom Gaskins
  * @version $Id: WWObjectImpl.java 4816 2008-03-26 19:46:19Z tgaskins $
+ * @comments ¼Ó×¢¼àÌýÆ÷¡£yecol.2010.4.13.
  */
 public class WWObjectImpl extends AVListImpl implements WWObject
 {

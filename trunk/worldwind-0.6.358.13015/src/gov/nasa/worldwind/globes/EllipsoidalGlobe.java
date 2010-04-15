@@ -18,11 +18,12 @@ import java.util.List;
 /**
  * @author Tom Gaskins
  * @version $Id: EllipsoidalGlobe.java 12998 2010-01-09 11:14:08Z tgaskins $
+ * @comments 类地行星类 yecol.2010.4.11.
  */
 public class EllipsoidalGlobe extends WWObjectImpl implements Globe
 {
     protected final double equatorialRadius;//类赤道圈半径
-    protected final double polarRadius;//类经度圈半径//Apple 苹果标注
+    protected final double polarRadius;//类经度圈半径
     protected final double es;
     private final Vec4 center;
     private ElevationModel elevationModel;

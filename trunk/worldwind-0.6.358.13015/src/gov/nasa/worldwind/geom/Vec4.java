@@ -10,6 +10,7 @@ import gov.nasa.worldwind.util.Logging;
 /**
  * @author dcollins
  * @version $Id: Vec4.java 12879 2009-12-09 23:12:59Z dcollins $
+ * @comments 向量及其操作定义。第四维? yecol.2010.4.11
  */
 public class Vec4
 {
@@ -544,6 +545,7 @@ public class Vec4
 
     public static Vec4 fromLine3(Vec4 origin, double t, Vec4 direction)
     {
+    	//向量和
         if (origin == null || direction == null)
         {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
@@ -760,6 +762,7 @@ public class Vec4
 
     public final double dot3(Vec4 vec4)
     {
+    	//点积
         if (vec4 == null)
         {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");
@@ -772,6 +775,7 @@ public class Vec4
 
     public final double dot4(Vec4 vec4)
     {
+    	//点积
         if (vec4 == null)
         {
             String msg = Logging.getMessage("nullValue.Vec4IsNull");

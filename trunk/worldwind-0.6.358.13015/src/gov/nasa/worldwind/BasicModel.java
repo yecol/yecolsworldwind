@@ -22,13 +22,14 @@ import java.util.logging.Level;
  *
  * @author Tom Gaskins
  * @version $Id: BasicModel.java 12937 2009-12-18 09:32:56Z tgaskins $
+ * @comments 一个Model绑定一个Globe和若干Layer。yecol.2010.4.15.
  */
 public class BasicModel extends WWObjectImpl implements Model
 {
     private Globe globe;
     private LayerList layers;
-    private boolean showWireframeInterior = false;
-    private boolean showWireframeExterior = false;
+    private boolean showWireframeInterior = false;//细线网格框是否显示
+    private boolean showWireframeExterior = false;//经纬块网格框是否显示
     private boolean showTessellationBoundingVolumes = false;
 
     public BasicModel()
@@ -43,9 +44,9 @@ public class BasicModel extends WWObjectImpl implements Model
         // configuration.
         LayerList layers = null;
         String layerNames = Configuration.getStringValue(AVKey.LAYERS_CLASS_NAMES);
-        if (layerNames != null)
+        if (layerNames != null)//false
         {
-            layers = this.createLayersFromProperties(layerNames);
+            layers = this.createLayersFromProperties(layerNames);//已过时
         }
         else
         {
@@ -66,6 +67,7 @@ public class BasicModel extends WWObjectImpl implements Model
      */
     protected LayerList createLayersFromElement(Element element)
     {
+    	//将节点element返回为LayerList。
         Object o = BasicFactory.create(AVKey.LAYER_FACTORY, element);
 
         if (o instanceof LayerList)

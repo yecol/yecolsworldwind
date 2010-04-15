@@ -58,7 +58,7 @@ public class BasicOrbitView extends BasicView implements OrbitView
 
         Double initPitch = Configuration.getDoubleValue(AVKey.INITIAL_PITCH);
         if (initPitch != null)
-            setPitch(Angle.fromDegrees(initPitch));
+            setPitch(Angle.fromDegrees(initPitch));//…Ë÷√«„–±∂»
 
         Double initAltitude = Configuration.getDoubleValue(AVKey.INITIAL_ALTITUDE);
         if (initAltitude != null)

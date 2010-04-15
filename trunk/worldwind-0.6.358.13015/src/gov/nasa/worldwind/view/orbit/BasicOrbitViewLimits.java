@@ -11,6 +11,7 @@ import gov.nasa.worldwind.view.BasicViewPropertyLimits;
 /**
  * @author dcollins
  * @version $Id: BasicOrbitViewLimits.java 10301 2009-04-17 20:21:46Z dcollins $
+ * @comments yecol.2010.4.11.
  */
 public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements OrbitViewLimits
 {
@@ -27,7 +28,7 @@ public class BasicOrbitViewLimits extends BasicViewPropertyLimits implements Orb
         this.maxCenterElevation = Double.MAX_VALUE;
         this.minHeading = Angle.NEG180;
         this.maxHeading = Angle.POS180;
-        this.minPitch = Angle.ZERO;
+        this.minPitch = Angle.ZERO;//«„–±∂»
         this.maxPitch = Angle.POS90;
         this.minZoom = 0;
         this.maxZoom = Double.MAX_VALUE;

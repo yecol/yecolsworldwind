@@ -17,6 +17,7 @@ import java.util.*;
 /**
  * @author Tom Gaskins
  * @version $Id: SceneController.java 13005 2010-01-14 00:30:41Z dcollins $
+ * @comments yecol.2010.4.13.
  */
 public interface SceneController extends WWObject, Disposable
 {

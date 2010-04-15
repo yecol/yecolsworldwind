@@ -35,13 +35,14 @@ import java.util.logging.Level;
  *
  * @author Tom Gaskins
  * @version $Id: WorldWindowGLAutoDrawable.java 12434 2009-08-10 17:20:39Z tgaskins $
+ * @comments 一个夸平台窗口类，内含星空，可嵌入。yecol.2010.4.13.
  */
 public class WorldWindowGLAutoDrawable extends WorldWindowImpl implements WorldWindowGLDrawable, GLEventListener
 {
     private GLAutoDrawable drawable;
     private DashboardController dashboard;
     private boolean shuttingDown = false;
-    private Timer redrawTimer;
+    private Timer redrawTimer;//重画间隔
     private boolean firstInit = true;
 
     /** Construct a new <code>WorldWindowGLCanvase</code> for a specified {@link GLDrawable}. */
