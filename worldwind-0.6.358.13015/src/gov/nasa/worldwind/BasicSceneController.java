@@ -11,6 +11,7 @@ import gov.nasa.worldwind.render.DrawContext;
 /**
  * @author Tom Gaskins
  * @version $Id: BasicSceneController.java 12618 2009-09-21 06:56:22Z jaddison $
+ * @comments doRepaintº¯Êý¡£yecol.2010.4.15
  */
 public class BasicSceneController extends AbstractSceneController
 {

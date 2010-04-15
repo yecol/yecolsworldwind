@@ -30,7 +30,7 @@ public class BasicView extends WWObjectImpl implements View
 {
 
     /** The field of view in degrees. */
-    protected Angle fieldOfView = Angle.fromDegrees(45);
+    protected Angle fieldOfView = Angle.fromDegrees(45);//高度
     // Provide reasonable default values for the near and far clip distances. By default, BasicView automatically
     // updates these values each frame based on the current eye position relative to the surface. These default values
     // are provided for two reasons:
@@ -51,11 +51,11 @@ public class BasicView extends WWObjectImpl implements View
     protected boolean detectCollisions = true;
     protected boolean hadCollisions;
     protected ViewInputHandler viewInputHandler;
-    protected Globe globe;
+    protected Globe globe;//球体对象
     protected Position eyePosition = Position.ZERO;
     protected Angle roll = Angle.fromDegrees(0.0);
-    protected Angle pitch = Angle.fromDegrees(0.0);
-    protected Angle heading = Angle.fromDegrees(0.0);
+    protected Angle pitch = Angle.fromDegrees(0.0);//水平轴偏转角
+    protected Angle heading = Angle.fromDegrees(0.0);//极轴偏转角
     protected Position lastEyePosition = null;
     protected Vec4 lastEyePoint = null;
     protected Vec4 lastUpVector = null;
@@ -111,6 +111,7 @@ public class BasicView extends WWObjectImpl implements View
 
     public void copyViewState(View view)
     {
+    	//将传入View的globe赋值给当前view的globe。
         this.globe = view.getGlobe();
         Vec4 center = view.getCenterPoint();
         if (center == null)

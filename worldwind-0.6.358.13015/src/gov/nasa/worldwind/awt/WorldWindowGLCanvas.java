@@ -26,7 +26,7 @@ import java.util.*;
  *
  * @author Tom Gaskins
  * @version $Id: WorldWindowGLCanvas.java 11421 2009-06-03 13:23:25Z tgaskins $
- * @comment 一个重量级的WW组件，包含了Globe和layers的显示和渲染。By yecol 2010.4.3
+ * @comment 一个重量级的WW组件，包含了Globe和Layers的显示和渲染。By yecol 2010.4.3
  */
 public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, PropertyChangeListener
 {
@@ -168,6 +168,7 @@ public class WorldWindowGLCanvas extends GLCanvas implements WorldWindow, Proper
     private void createDefaultInputHandler()
     {
         this.setInputHandler((InputHandler) WorldWind.createConfigurationComponent(AVKey.INPUT_HANDLER_CLASS_NAME));
+        //将一个gov.nasa.worldwind.awt.AWTInputHandler类初始化，赋值给this。
     }
 
     public InputHandler getInputHandler()

@@ -25,6 +25,7 @@ import java.util.*;
  * @author Tom Gaskins
  * @version $Id: Sector.java 12987 2010-01-09 04:01:24Z tgaskins $
  * @see Angle
+ * @comments 用四个角度定义的区域。最高/最低纬度+最小/最大经度。yecol.2010.4.11.
  */
 public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon>
 {
@@ -93,6 +94,7 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon>
 
     public static Sector boundingSector(java.util.Iterator<TrackPoint> positions)
     {
+    	//从一个可遍历的接口中，遍历所有的TrackPoint。划定一个最小Sector将之圈定。
         if (positions == null)
         {
             String message = Logging.getMessage("nullValue.TracksPointsIteratorNull");
@@ -130,6 +132,7 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon>
 
     public static Sector boundingSector(Iterable<? extends LatLon> locations)
     {
+    	//根据传入的可遍历坐标，划定最小Sector。
         if (locations == null)
         {
             String message = Logging.getMessage("nullValue.PositionsListIsNull");
@@ -165,6 +168,8 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon>
 
     public static Sector[] splitBoundingSectors(Iterable<? extends LatLon> locations)
     {
+    	//生成Sector的一种情况：散点跨越零点线。
+    	//此时，返回两个Sector，分别在东西半球。
         if (locations == null)
         {
             String message = Logging.getMessage("nullValue.LocationInListIsNull");
@@ -218,6 +223,7 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon>
 
     public static Sector boundingSector(LatLon pA, LatLon pB)
     {
+    	//由两点构成的Sector
         if (pA == null || pB == null)
         {
             String message = Logging.getMessage("nullValue.PositionsListIsNull");
@@ -258,6 +264,7 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon>
      */
     public static Sector boundingSector(Globe globe, LatLon center, double radius)
     {
+    	//返回一个区域，该区域以center为中心，以radius为半径。
         double halfDeltaLatRadians = radius / globe.getRadiusAt(center);
         double halfDeltaLonRadians = Math.PI * 2;
         if (center.getLatitude().cos() > 0)
@@ -434,6 +441,7 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon>
 
     public boolean isWithinLatLonLimits()
     {
+    	//超出无意义。
         return this.minLatitude.degrees >= -90 && this.maxLatitude.degrees <= 90
             && this.minLongitude.degrees >= -180 && this.maxLongitude.degrees <= 180;
     }
@@ -499,6 +507,7 @@ public class Sector implements Cacheable, Comparable<Sector>, Iterable<LatLon>
      */
     public LatLon getCentroid()
     {
+    	//获得中点
         Angle la = Angle.fromDegrees(0.5 * (this.getMaxLatitude().degrees + this.getMinLatitude().degrees));
         Angle lo = Angle.fromDegrees(0.5 * (this.getMaxLongitude().degrees + this.getMinLongitude().degrees));
         return new LatLon(la, lo);

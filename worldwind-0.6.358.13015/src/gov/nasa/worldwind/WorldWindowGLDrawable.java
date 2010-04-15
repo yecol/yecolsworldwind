@@ -13,6 +13,7 @@ import javax.media.opengl.GLAutoDrawable;
 /**
  * @author tag
  * @version $Id: WorldWindowGLDrawable.java 11421 2009-06-03 13:23:25Z tgaskins $
+ * @comments yecol.2010.4.6.
  */
 public interface WorldWindowGLDrawable extends WorldWindow
 {

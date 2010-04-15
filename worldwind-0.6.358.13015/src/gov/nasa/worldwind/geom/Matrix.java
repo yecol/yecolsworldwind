@@ -12,6 +12,7 @@ import gov.nasa.worldwind.util.Logging;
 /**
  * @author dcollins
  * @version $Id: Matrix.java 12878 2009-12-09 22:56:51Z dcollins $
+ * @comments æÿ’Û¿‡ yecol.2010.4.11.
  */
 public class Matrix
 {
