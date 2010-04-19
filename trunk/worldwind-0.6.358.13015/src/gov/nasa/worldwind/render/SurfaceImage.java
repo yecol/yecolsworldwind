@@ -17,6 +17,7 @@ import java.util.*;
  * Renders a single image contained in a local file or <code>BufferedImage</code>
  *
  * @version $Id: SurfaceImage.java 12869 2009-12-09 05:13:27Z tgaskins $
+ * @comments 表层图像类。其中Movable接口关键。本类相关BasicWWTexture类。yecol.2010.4.18.
  */
 public class SurfaceImage implements SurfaceTile, Renderable, PreRenderable, Movable, Disposable
 {
@@ -114,6 +115,8 @@ public class SurfaceImage implements SurfaceTile, Renderable, PreRenderable, Mov
 
     protected void initializeGeometry(Iterable<? extends LatLon> corners)
     {
+    	//从四角坐标中生成一个sector，赋值给this.sector
+    	//将该sector的中点Position赋值给this.referencePosition
         this.corners = new ArrayList<LatLon>(4);
         for (LatLon ll : corners)
         {

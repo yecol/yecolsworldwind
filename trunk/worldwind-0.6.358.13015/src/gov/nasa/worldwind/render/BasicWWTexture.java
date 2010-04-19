@@ -19,6 +19,7 @@ import java.io.InputStream;
  *
  * @author tag
  * @version $Id: BasicWWTexture.java 12721 2009-10-14 19:57:40Z tgaskins $
+ * @comments 上下文类。包括从一个图片对象生成一个上下文。yecol.2010.4.18.
  */
 public class BasicWWTexture implements WWTexture
 {
