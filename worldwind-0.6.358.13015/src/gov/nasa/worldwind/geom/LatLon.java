@@ -49,7 +49,7 @@ public class LatLon
         return new LatLon(latitude, longitude);
     }
 
-    private LatLon(double latitude, double longitude)
+    public LatLon(double latitude, double longitude)
     {
         this.latitude = Angle.fromDegrees(latitude);
         this.longitude = Angle.fromDegrees(longitude);

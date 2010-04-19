@@ -25,7 +25,7 @@ import java.awt.*;
  * @version $Id: ApplicationTemplate.java 11460 2009-06-05 08:23:56Z tgaskins $
  * @comments 基本的应用程序模板。可供继承。yecol.2010.4.16.
  */
-public class ApplicationTemplate
+public class YecolsApplicationTemplate
 {
     public static class AppPanel extends JPanel
     {
@@ -76,7 +76,7 @@ public class ApplicationTemplate
         private Dimension canvasSize = new Dimension(800, 600);
 
         protected AppPanel wwjPanel;
-        protected LayerPanel layerPanel;
+        protected YecolsPanel layerPanel;
         protected StatisticsPanel statsPanel;
 
         public AppFrame()
@@ -99,7 +99,7 @@ public class ApplicationTemplate
             this.getContentPane().add(wwjPanel, BorderLayout.CENTER);
             if (includeLayerPanel)
             {
-                this.layerPanel = new LayerPanel(this.wwjPanel.getWwd(), null);
+                this.layerPanel = new YecolsPanel(this.wwjPanel.getWwd(), null);
                 this.getContentPane().add(this.layerPanel, BorderLayout.WEST);
             }
 
@@ -159,7 +159,7 @@ public class ApplicationTemplate
             return this.wwjPanel.getStatusBar();
         }
 
-        public LayerPanel getLayerPanel()
+        public YecolsPanel getLayerPanel()
         {
             return layerPanel;
         }
@@ -269,6 +269,6 @@ public class ApplicationTemplate
     {
         // Call the static start method like this from the main method of your derived class.
         // Substitute your application's name for the first argument.
-        ApplicationTemplate.start("World Wind Application", AppFrame.class);
+        YecolsApplicationTemplate.start("World Wind Application", AppFrame.class);
     }
 }

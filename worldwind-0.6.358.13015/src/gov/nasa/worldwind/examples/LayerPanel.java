@@ -1,7 +1,12 @@
 package gov.nasa.worldwind.examples;
 
 import gov.nasa.worldwind.WorldWindow;
+import gov.nasa.worldwind.avlist.AVKey;
+import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.layers.*;
+import gov.nasa.worldwind.render.Annotation;
+import gov.nasa.worldwind.render.AnnotationShadow;
+import gov.nasa.worldwind.render.GlobeAnnotation;
 
 import javax.swing.*;
 import javax.swing.border.*;

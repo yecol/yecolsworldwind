@@ -13,6 +13,7 @@ import gov.nasa.worldwind.render.DrawContext;
 /**
  * @author Tom Gaskins
  * @version $Id: Layer.java 10492 2009-04-25 05:20:41Z tgaskins $
+ * @comments Layer½Ó¿Ú¡£yecol.2010.4.16.
  */
 public interface Layer extends WWObject, Disposable, Restorable
 {

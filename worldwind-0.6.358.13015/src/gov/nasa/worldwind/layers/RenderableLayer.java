@@ -20,6 +20,7 @@ import javax.media.opengl.*;
  * @author tag
  * @version $Id: RenderableLayer.java 12821 2009-11-24 00:17:57Z tgaskins $
  * @see gov.nasa.worldwind.render.Renderable
+ * @comments 可渲染图层类。该类维护一个可渲染对象列表。在render函数中，列表中各对象自行渲染。yecol.2010.4.18.
  */
 public class RenderableLayer extends AbstractLayer
 {
@@ -41,7 +42,7 @@ public class RenderableLayer extends AbstractLayer
      */
     public RenderableLayer(Layer delegateOwner)
     {
-        this.delegateOwner = delegateOwner;
+        this.delegateOwner = delegateOwner;//委托者或授权者
     }
 
     /**
@@ -394,6 +395,7 @@ public class RenderableLayer extends AbstractLayer
 
     protected void doRender(DrawContext dc, Iterable<? extends Renderable> renderables)
     {
+    	//renderables中各自渲染。
         for (Renderable renderable : renderables)
         {
             try

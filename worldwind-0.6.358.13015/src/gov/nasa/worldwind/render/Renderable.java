@@ -9,6 +9,8 @@ package gov.nasa.worldwind.render;
 /**
  * @author Tom Gaskins
  * @version $Id: Renderable.java 2471 2007-07-31 21:50:57Z tgaskins $
+ * @comments 可渲染类接口。可渲染意味着这个对象可以通过自身的DrawContext对象渲染。
+ * 该对象中包含了一个高度模型、一个OG实例、一个球体等。yecol.2010.4.18.
  */
 public interface Renderable
 {

@@ -18,6 +18,7 @@ import java.beans.PropertyChangeEvent;
 /**
  * @author tag
  * @version $Id: AbstractLayer.java 12535 2009-08-31 21:12:57Z tgaskins $
+ * @comments 抽象图层类。yecol.2010.4.18.
  */
 public abstract class AbstractLayer extends WWObjectImpl implements Layer
 {
@@ -157,7 +158,8 @@ public abstract class AbstractLayer extends WWObjectImpl implements Layer
     /**
      * Indicates whether the layer is active based on arbitrary criteria. The method implemented here is a default
      * indicating the layer is active if the current altitude is within the layer's min and max active altitudes.
-     * Subclasses able to consider more criteria should override this implementation.
+     * Subclasses able to consider more criteria should override this implementation.<br>
+     * 通过判断当前EyePoint的高度是否在该Layer可见高度范围内来判定。
      *
      * @param dc the current draw context
      * @return <code>true</code> if the layer is active, <code>false</code> otherwise.

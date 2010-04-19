@@ -18,6 +18,7 @@ All Rights Reserved.
 /**
  * @author Tom Gaskins
  * @version $Id: LayerList.java 12963 2009-12-24 09:54:34Z tgaskins $
+ * @comments 图层列表类。该类维护一个图层列表，以及相关的事件触发器，并不负图层的渲染。yecol.2010.4.16.
  */
 public class LayerList extends CopyOnWriteArrayList<Layer> implements WWObject
 {
