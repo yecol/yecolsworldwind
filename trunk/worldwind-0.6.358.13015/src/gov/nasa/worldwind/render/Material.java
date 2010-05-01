@@ -18,8 +18,8 @@ import java.awt.*;
  */
 public class Material
 {
-    private final Color ambient;
-    private final Color diffuse;
+    private final Color ambient;//ÖÜÎ§µÄ
+    private final Color diffuse;//À©É¢µÄ
     private final Color specular;
     private final Color emission;
     private final double shininess;

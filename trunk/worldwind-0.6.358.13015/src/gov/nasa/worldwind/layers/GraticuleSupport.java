@@ -15,6 +15,7 @@ import java.util.*;
 /**
  * @author dcollins
  * @version $Id: GraticuleSupport.java 12703 2009-10-09 00:58:59Z patrickmurris $
+ * @comments 地理网格绘画辅助类。包括网格线和标签以及各自的形状，颜色。yecol.2010.4.24.
  */
 public class GraticuleSupport
 {

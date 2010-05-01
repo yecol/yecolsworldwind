@@ -13,6 +13,7 @@ import gov.nasa.worldwind.WWObjectImpl;
 /**
  * @author dcollins
  * @version $Id: BasicDataDescriptor.java 7630 2008-11-14 21:35:01Z dcollins $
+ * @comments 基本的数据描述。yecol.2010.4.30.
  */
 public class BasicDataDescriptor extends WWObjectImpl implements DataDescriptor
 {

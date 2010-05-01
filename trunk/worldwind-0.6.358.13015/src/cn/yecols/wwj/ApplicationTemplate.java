@@ -4,20 +4,23 @@ as represented by the Administrator of the
 National Aeronautics and Space Administration.
 All Rights Reserved.
 */
-package gov.nasa.worldwind.examples;
+package cn.yecols.wwj;
 
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.awt.*;
 import gov.nasa.worldwind.event.*;
+import gov.nasa.worldwind.examples.ClickAndGoSelectListener;
+import gov.nasa.worldwind.examples.LayerPanel;
 import gov.nasa.worldwind.exception.*;
+import gov.nasa.worldwind.geom.Sector;
 import gov.nasa.worldwind.layers.*;
 import gov.nasa.worldwind.layers.placename.*;
+import gov.nasa.worldwind.render.SurfaceImage;
 import gov.nasa.worldwind.util.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * Provides a base application framework for simple WorldWind examples. Although this class will run stand-alone, it is
@@ -26,7 +29,7 @@ import java.util.ArrayList;
  * @version $Id: ApplicationTemplate.java 11460 2009-06-05 08:23:56Z tgaskins $
  * @comments 基本的应用程序模板。可供继承。yecol.2010.4.16.
  */
-public class YecolsApplicationTemplate
+public class ApplicationTemplate
 {
     public static class AppPanel extends JPanel
     {
@@ -77,9 +80,8 @@ public class YecolsApplicationTemplate
         private Dimension canvasSize = new Dimension(800, 600);
 
         protected AppPanel wwjPanel;
-        protected YecolsPanel layerPanel;
+        protected LayerPanel layerPanel;
         protected StatisticsPanel statsPanel;
-       //protected ArrayList<YecolsAnnotationData> annotationList;
 
         public AppFrame()
         {
@@ -89,6 +91,7 @@ public class YecolsApplicationTemplate
         public AppFrame(boolean includeStatusBar, boolean includeLayerPanel, boolean includeStatsPanel)
         {
             this.initialize(includeStatusBar, includeLayerPanel, includeStatsPanel);
+            MakeYecolsImageLayer();//add yecol's layer
         }
 
         protected void initialize(boolean includeStatusBar, boolean includeLayerPanel, boolean includeStatsPanel)
@@ -101,8 +104,7 @@ public class YecolsApplicationTemplate
             this.getContentPane().add(wwjPanel, BorderLayout.CENTER);
             if (includeLayerPanel)
             {
-            	//this.annotationList=new ArrayList<YecolsAnnotationData>();
-                this.layerPanel = new YecolsPanel(this.wwjPanel.getWwd(), null);
+                this.layerPanel = new LayerPanel(this.wwjPanel.getWwd(), null);
                 this.getContentPane().add(this.layerPanel, BorderLayout.WEST);
             }
 
@@ -136,6 +138,28 @@ public class YecolsApplicationTemplate
             WWUtil.alignComponent(null, this, AVKey.CENTER);
             this.setResizable(true);
         }
+        
+        protected void MakeYecolsImageLayer(){
+        	// Create yecol's Layer
+
+        	ImageDataLayerUtil imageDataLayerUtil=new ImageDataLayerUtil();
+        	
+            insertBeforePlacenames(this.getWwd(), imageDataLayerUtil.getLayer());
+            //this.getWwd().get
+            
+            /*
+            this.getWwd().addSelectListener(new SelectListener()
+            {
+                private BasicDragger dragger = new BasicDragger(getWwd());
+
+                public void selected(SelectEvent event)
+                {
+                    // Delegate dragging computations to a dragger.
+                    this.dragger.selected(event);
+                }
+            });*/
+            //this.getWwd().addSelectListener(listener)
+        }
 
         protected AppPanel createAppPanel(Dimension canvasSize, boolean includeStatusBar)
         {
@@ -162,7 +186,7 @@ public class YecolsApplicationTemplate
             return this.wwjPanel.getStatusBar();
         }
 
-        public YecolsPanel getLayerPanel()
+        public LayerPanel getLayerPanel()
         {
             return layerPanel;
         }
@@ -272,6 +296,6 @@ public class YecolsApplicationTemplate
     {
         // Call the static start method like this from the main method of your derived class.
         // Substitute your application's name for the first argument.
-        YecolsApplicationTemplate.start("World Wind Application", AppFrame.class);
+        ApplicationTemplate.start("World Wind Application", AppFrame.class);
     }
 }

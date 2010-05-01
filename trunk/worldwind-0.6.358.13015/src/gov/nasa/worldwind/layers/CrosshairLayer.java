@@ -22,6 +22,7 @@ import java.io.*;
  * 
  * @author Patrick Murris
  * @version $Id: CrosshairLayer.java 12779 2009-11-10 04:26:01Z tgaskins $
+ * @comments 一个屏幕正中的十字光标类。包括图标，显示位置，是否可缩放，透明度等设置和获取。yecol.2010.4.24.
  */
 public class CrosshairLayer  extends AbstractLayer
 {

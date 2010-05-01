@@ -7,6 +7,7 @@ import gov.nasa.worldwind.avlist.AVList;
  *
  * @author tag
  * @version $Id: Factory.java 12579 2009-09-12 01:07:05Z tgaskins $
+ * @comments yecol.2010.4.22.
  */
 public interface Factory
 {

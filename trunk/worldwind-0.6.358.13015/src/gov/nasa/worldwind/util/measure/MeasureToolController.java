@@ -21,6 +21,7 @@ import java.awt.event.*;
  * @author Patrick Murris
  * @version $Id: MeasureToolController.java 12818 2009-11-21 00:38:52Z dcollins $
  * @see MeasureTool
+ * @comments MeasureTool控制类。并负责事件监听和处理。yecol.2010.4.26.
  */
 public class MeasureToolController extends MouseAdapter
         implements MouseListener, MouseMotionListener, SelectListener, PositionListener, RenderingListener

@@ -9,6 +9,7 @@ import gov.nasa.worldwind.util.RestorableSupport;
 /**
  * @author dcollins
  * @version $Id$
+ * @comments ÐÎ×´²ÎÊý¡£yecol.2010.4.24.
  */
 public interface ShapeAttributes
 {

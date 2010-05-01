@@ -19,6 +19,7 @@ import gov.nasa.worldwind.util.Logging;
  * @version $Id: AnnotationLayer.java 12447 2009-08-13 01:20:19Z tgaskins $
  * @see gov.nasa.worldwind.render.Annotation
  * @see gov.nasa.worldwind.render.AnnotationRenderer
+ * @comments 标注类。内部维护一个annotations的并发保护集，和一个私有的AnnotationRender。yecol.2010.4.22.
  */
 public class AnnotationLayer extends AbstractLayer
 {

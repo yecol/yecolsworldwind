@@ -17,6 +17,7 @@ import javax.xml.xpath.XPath;
  *
  * @author dcollins
  * @version $Id: BasicDataConfiguration.java 11666 2009-06-16 15:49:14Z dcollins $
+ * @comments 一个基本的数据配置类，实现了数据配置接口。数据配置类结构性地维护一组描述组件或组件集的数据。yecol.2010.4.24.
  */
 public class BasicDataConfiguration implements DataConfiguration
 {

@@ -16,6 +16,7 @@ import gov.nasa.worldwind.util.Logging;
 /**
  * @author tag
  * @version $Id: MarkerLayer.java 12781 2009-11-10 04:39:00Z tgaskins $
+ * @comments 标记图层。yecol.2010.4.25.
  */
 public class MarkerLayer extends AbstractLayer
 {
@@ -43,6 +44,7 @@ public class MarkerLayer extends AbstractLayer
 
     public double getElevation()
     {
+    	//该标记渲染器的高度
         return this.getMarkerRenderer().getElevation();
     }
 

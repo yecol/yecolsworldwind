@@ -12,6 +12,7 @@ import gov.nasa.worldwind.globes.*;
 /**
  * @author tag
  * @version $Id: MeasurableLength.java 6741 2008-09-19 01:32:05Z tgaskins $
+ * @comments 可长度测量的接口，返回沿地表计算的长度。yecol.2010.4.22.
  */
 public interface MeasurableLength
 {

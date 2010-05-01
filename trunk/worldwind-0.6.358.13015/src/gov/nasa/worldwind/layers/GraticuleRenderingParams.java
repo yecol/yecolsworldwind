@@ -13,18 +13,19 @@ import java.awt.*;
 /**
  * @author dcollins
  * @version $Id: GraticuleRenderingParams.java 11758 2009-06-19 10:02:02Z patrickmurris $
+ * @comments 地理网格线渲染参数读取与设置。yecol.2010.4.28.
  */
 public class GraticuleRenderingParams extends AVListImpl
 {
-    public static final String KEY_DRAW_LINES = "DrawGraticule";
-    public static final String KEY_LINE_COLOR = "GraticuleLineColor";
-    public static final String KEY_LINE_WIDTH = "GraticuleLineWidth";
-    public static final String KEY_LINE_STYLE = "GraticuleLineStyle";
-    public static final String KEY_LINE_CONFORMANCE = "GraticuleLineConformance";
-    public static final String KEY_DRAW_LABELS = "DrawLabels";
-    public static final String KEY_LABEL_COLOR = "LabelColor";
-    public static final String KEY_LABEL_FONT = "LabelFont";
-    public static final String VALUE_LINE_STYLE_SOLID = "LineStyleSolid";
+    public static final String KEY_DRAW_LINES = "DrawGraticule";//是否画线，1或者0。
+    public static final String KEY_LINE_COLOR = "GraticuleLineColor";//地理网格线颜色
+    public static final String KEY_LINE_WIDTH = "GraticuleLineWidth";//地理网格线宽度
+    public static final String KEY_LINE_STYLE = "GraticuleLineStyle";//地理网格线类型
+    public static final String KEY_LINE_CONFORMANCE = "GraticuleLineConformance";//
+    public static final String KEY_DRAW_LABELS = "DrawLabels";//是否画标签
+    public static final String KEY_LABEL_COLOR = "LabelColor";//标签颜色
+    public static final String KEY_LABEL_FONT = "LabelFont";//标签字体
+    public static final String VALUE_LINE_STYLE_SOLID = "LineStyleSolid";//线条类型
     public static final String VALUE_LINE_STYLE_DASHED = "LineStyleDashed";
     public static final String VALUE_LINE_STYLE_DOTTED = "LineStyleDotted";
 

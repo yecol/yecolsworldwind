@@ -105,7 +105,8 @@ public interface Layer extends WWObject, Disposable, Restorable
     /**
      * Indicates whether the most recent rendering of the layer rendered the highest resolution imagery or other data
      * available. Some layers do not track resolution. For those layers this value will always be <code>true</code>.
-     * Typically such layers also return <code>false</code> from {@link #isMultiResolution}.
+     * Typically such layers also return <code>false</code> from {@link #isMultiResolution}.<br>
+     * 是否在最精细级别而无精度更高的图像可用。一些静态的图层往往在isMultiResolution函数中返回false。
      *
      * @return <code>true</code> if the layer is at maximum resolution, otherwise <code>false</code>.
      */
