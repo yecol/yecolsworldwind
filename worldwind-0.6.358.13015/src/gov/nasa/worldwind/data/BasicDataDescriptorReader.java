@@ -13,6 +13,7 @@ import java.io.*;
 /**
  * @author dcollins
  * @version $Id: BasicDataDescriptorReader.java 9495 2009-03-18 19:01:38Z dcollins $
+ * @comments 基本的数据描述读取类。yecol.2010.4.30.
  */
 public class BasicDataDescriptorReader extends AbstractDataDescriptorReader
 {
@@ -52,6 +53,7 @@ public class BasicDataDescriptorReader extends AbstractDataDescriptorReader
     {
         // We short circuit the process of probing the file for contents by requiring that the file name
         // or URL string end in ".xml".
+    	//从MimeType决定生成后缀，判定当前src是否以此结尾，是可读，否则不可读。
         String path = null;
         if (src instanceof java.io.File)
             path = ((java.io.File) src).getPath();

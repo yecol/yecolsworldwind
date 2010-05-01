@@ -10,6 +10,7 @@ import gov.nasa.worldwind.util.Logging;
 /**
  * @author dcollins
  * @version $Id: BasicDataSource.java 8321 2009-01-05 17:06:14Z dcollins $
+ * @comments Basic Source Object.yecol.2010.4.30.
  */
 public class BasicDataSource extends WWObjectImpl implements DataSource
 {

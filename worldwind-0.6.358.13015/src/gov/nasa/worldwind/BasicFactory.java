@@ -19,6 +19,7 @@ import java.io.File;
  *
  * @author tag
  * @version $Id: BasicFactory.java 12579 2009-09-12 01:07:05Z tgaskins $
+ * @comments Factory类，可从配置文件生成文件、元素等对象。yecol.2010.4.22.
  */
 public class BasicFactory implements Factory
 {

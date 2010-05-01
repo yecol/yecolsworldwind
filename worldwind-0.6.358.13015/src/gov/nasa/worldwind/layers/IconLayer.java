@@ -18,13 +18,14 @@ import gov.nasa.worldwind.util.Logging;
  * @version $Id: IconLayer.java 12610 2009-09-20 07:34:42Z jaddison $
  * @see gov.nasa.worldwind.render.WWIcon
  * @see gov.nasa.worldwind.render.IconRenderer
+ * @comments 图标类。处理一个WWIcon集合的选择和渲染。内部对象iconRenderer来渲染维护的集合内部对象。
  */
 public class IconLayer extends AbstractLayer
 {
     private final java.util.Collection<WWIcon> icons = new java.util.concurrent.ConcurrentLinkedQueue<WWIcon>();
     private Iterable<WWIcon> iconsOverride;
     private IconRenderer iconRenderer = new IconRenderer();
-    private Pedestal pedestal;
+    private Pedestal pedestal;//基座，该类内部的IconRenderer使用。
 
     /** Creates a new <code>IconLayer</code> with an empty collection of Icons. */
     public IconLayer()

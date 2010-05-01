@@ -11,6 +11,7 @@ import gov.nasa.worldwind.util.Logging;
 /**
  * @author Tom Gaskins
  * @version $Id: Line.java 12530 2009-08-29 17:55:54Z jterhorst $
+ * @comments 线类，以起点坐标和方向矢量给出。yecol.2010.4.22.
  */
 public final class Line// Instances are immutable
 {

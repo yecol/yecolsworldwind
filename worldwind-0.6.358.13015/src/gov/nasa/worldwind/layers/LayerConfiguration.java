@@ -19,6 +19,7 @@ import javax.xml.xpath.*;
  *
  * @author dcollins
  * @version $Id: LayerConfiguration.java 13009 2010-01-15 19:25:31Z dcollins $
+ * @comments 一个继承自BasicDataConfiguration的图层配置类。yecol.2010.4.24.
  */
 public class LayerConfiguration extends BasicDataConfiguration
 {
@@ -64,6 +65,7 @@ public class LayerConfiguration extends BasicDataConfiguration
 
     protected DataConfiguration createChildConfigInfo(Element domElement)
     {
+    	//将参数节点重新作为一个配置根节点初始化。
         return new LayerConfiguration(domElement);
     }
 

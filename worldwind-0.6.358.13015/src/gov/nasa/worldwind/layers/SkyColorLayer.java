@@ -23,7 +23,8 @@ import java.awt.*;
 public class SkyColorLayer extends RenderableLayer
 {
     private Color color = new Color(73, 131, 204); // Sky blue
-    private double fadeBottomAltitude = 50e3;
+	//private Color color = new Color(0, 0, 0); 
+	private double fadeBottomAltitude = 50e3;
     private double fadeTopAltitude = 140e3;
 
     /**

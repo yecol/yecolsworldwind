@@ -20,6 +20,7 @@ import gov.nasa.worldwind.util.Logging;
  * @version $Id: SurfaceShapeLayer.java 10106 2009-04-11 00:36:50Z dcollins $
  * @see gov.nasa.worldwind.render.SurfaceShape
  * @see gov.nasa.worldwind.render.TiledSurfaceObjectRenderer
+ * @comments 表面形状图层。继承自RenderableLayer。如果是SurfaceShape则用特定的渲染器渲染，否则按一般的RenderableLayer处理。yecol.2010.4.25.
  */
 public class SurfaceShapeLayer extends RenderableLayer
 {

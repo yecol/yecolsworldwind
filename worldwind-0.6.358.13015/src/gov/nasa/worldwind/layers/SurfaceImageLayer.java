@@ -23,6 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @author tag
  * @version $Id: SurfaceImageLayer.java 12821 2009-11-24 00:17:57Z tgaskins $
+ * @comments 表面图像图层。维护一个表面图像类列表，又一个为Sector进行图层合并的函数。yecol.2010.4.25.
  */
 public class SurfaceImageLayer extends RenderableLayer
 {
@@ -73,7 +74,7 @@ public class SurfaceImageLayer extends RenderableLayer
             throw new IllegalArgumentException(message);
         }
 
-        AVList values = ImageUtil.openSpatialImage(imageFile);
+        AVList values = ImageUtil.openSpatialImage(imageFile);//该函数自建一个AVListImpl，填写IMAGE和SECTOR后返回。
         final BufferedImage image = (BufferedImage) values.getValue(AVKey.IMAGE);
         Sector sector = (Sector) values.getValue(AVKey.SECTOR);
         if (image == null || sector == null)
@@ -335,7 +336,8 @@ public class SurfaceImageLayer extends RenderableLayer
 
     /**
      * Create an image for the portion of this layer lying within a specified sector. The image is created at a
-     * specified aspect ratio within a canvas of a specified size.
+     * specified aspect ratio within a canvas of a specified size.<br>
+     * 叠加图层，为Sector返回合成图。
      *
      * @param sector       the sector of interest.
      * @param canvasWidth  the width of the canvas.

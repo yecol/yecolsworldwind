@@ -25,6 +25,7 @@ import java.util.logging.Level;
  *
  * @author tag
  * @version $Id: ImageTiler.java 12683 2009-10-02 03:16:46Z tgaskins $
+ * @comments 图片切片类。该类可根据一张原始图片和该图片覆盖的sector，切割该图片成为一组Tile。yecol.2010.4.25.
  */
 public class ImageTiler
 {
@@ -74,6 +75,7 @@ public class ImageTiler
      * @param listener   the listener to invoke when each new tile is created.
      *
      * @link{#ImageTilerListener}.
+     * 完成切片后触发监听器
      */
     public void tileImage(BufferedImage baseImage, Sector baseSector, ImageTilerListener listener)
     {

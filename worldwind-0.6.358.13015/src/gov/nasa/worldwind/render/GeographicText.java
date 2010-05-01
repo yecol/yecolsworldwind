@@ -12,6 +12,7 @@ import java.awt.*;
 /**
  * @author dcollins
  * @version $Id: GeographicText.java 9571 2009-03-20 14:10:31Z jparsons $
+ * @comments 图性文字接口。yecol.2010.4.24.
  */
 public interface GeographicText
 {

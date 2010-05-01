@@ -19,7 +19,7 @@ public class YecolsPanel extends JPanel {
 	private JPanel annotationPanel;
 	private JPanel westPanel;
 	private JScrollPane scrollPane;
-	private ArrayList<YecolsAnnotationData> annotationList;
+	protected ArrayList<YecolsAnnotationData> annotationList;
 
 	public YecolsPanel(WorldWindow wwd) {
 		// Make a panel at a default size.
@@ -33,6 +33,13 @@ public class YecolsPanel extends JPanel {
 		super(new BorderLayout());
 		annotationList = new ArrayList<YecolsAnnotationData>();
 		this.makePanel(wwd, size);
+	}
+	
+	public YecolsPanel(WorldWindow wwd, Dimension size,ArrayList<YecolsAnnotationData> list) {
+		// Make a panel at a specified size and pass the list.
+		super(new BorderLayout());
+		this.makePanel(wwd, size);
+		this.annotationList=list;
 	}
 
 	private void makePanel(WorldWindow wwd, Dimension size) {

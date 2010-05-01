@@ -90,6 +90,7 @@ import java.util.List;
  * @author Patrick Murris
  * @version $Id: MeasureTool.java 12738 2009-10-24 00:02:27Z tgaskins $
  * @see MeasureToolController
+ * @comments 测量工具类。具体用法见上表List。yecol.2010.4.26.
  */
 public class MeasureTool extends AVListImpl implements Disposable
 {

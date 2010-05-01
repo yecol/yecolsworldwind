@@ -9,6 +9,7 @@ import gov.nasa.worldwind.util.*;
 /**
  * @author dcollins
  * @version $Id: BasicDataIODescriptor.java 9168 2009-03-05 00:40:03Z dcollins $
+ * @comments Basic Data IO Desc. yecol.2010.4.30.
  */
 public class BasicDataIODescriptor implements DataIODescriptor
 {

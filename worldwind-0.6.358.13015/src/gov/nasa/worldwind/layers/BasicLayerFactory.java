@@ -18,6 +18,8 @@ import java.util.*;
  *
  * @author dcollins
  * @version $Id: BasicLayerFactory.java 13012 2010-01-15 19:46:06Z dcollins $
+ * @comments 一个图层工厂，继承了BasicFactory。它实现从配置文件中生成图层。<br>
+ * 特别是对于基本的地球数据图层，由该类从XML配置文件生成远程数据图层。yecol.2010.4.22.
  */
 public class BasicLayerFactory extends BasicFactory
 {

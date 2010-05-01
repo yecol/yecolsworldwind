@@ -4,10 +4,11 @@ as represented by the Administrator of the
 National Aeronautics and Space Administration.
 All Rights Reserved.
 */
-package gov.nasa.worldwind.examples;
+package cn.yecols.wwj;
 
 import gov.nasa.worldwind.Configuration;
 import gov.nasa.worldwind.avlist.AVKey;
+import gov.nasa.worldwind.examples.MeasureToolPanel;
 import gov.nasa.worldwind.geom.LatLon;
 import gov.nasa.worldwind.layers.TerrainProfileLayer;
 import gov.nasa.worldwind.util.measure.MeasureTool;
@@ -40,7 +41,7 @@ public class MeasureToolUsage extends ApplicationTemplate
 
         public AppFrame()
         {
-            super(true, false, true); // no layer panel
+            super(true, false, false); // no layer panel
 
             // Add terrain profile layer
             profile.setEventSource(getWwd());
@@ -131,11 +132,12 @@ public class MeasureToolUsage extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-    	Configuration.setValue(AVKey.INITIAL_LATITUDE, 47.15);
+    	/*Configuration.setValue(AVKey.INITIAL_LATITUDE, 47.15);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -122.74);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 300e3);
         Configuration.setValue(AVKey.INITIAL_PITCH, 60);
         Configuration.setValue(AVKey.INITIAL_HEADING, 155);
+        */
         
         ApplicationTemplate.start("World Wind Measure Tool", MeasureToolUsage.AppFrame.class);
     }

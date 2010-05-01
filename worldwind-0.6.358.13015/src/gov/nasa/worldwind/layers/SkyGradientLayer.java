@@ -23,6 +23,7 @@ import java.awt.*;
  *
  * @author Patrick Murris
  * @version $Id: SkyGradientLayer.java 12689 2009-10-04 17:42:00Z patrickmurris $
+ * @comments ´óÆø²ã½¥±äÍ¼²ã¡£yecol.2010.4.25.
  */
 public class SkyGradientLayer extends AbstractLayer
 {
@@ -33,6 +34,9 @@ public class SkyGradientLayer extends AbstractLayer
     // TODO: make configurable
     protected double thickness = 100e3; // Atmosphere thickness
     //protected float[] horizonColor = new float[] { 0.66f, 0.70f, 0.81f, 1.0f }; // horizon color (same as fog)
+    //protected float[] horizonColor = new float[] { 0f, 0f, 0f, 1.0f }; // yecol test horizon color 
+    //protected float[] zenithColor = new float[]{1f, 1f, 1f, 1.0f}; // yecol test zenith color
+
     protected float[] horizonColor = new float[] { 0.76f, 0.76f, 0.80f, 1.0f }; // horizon color 
     protected float[] zenithColor = new float[]{0.26f, 0.47f, 0.83f, 1.0f}; // zenith color
     protected double lastRebuildHorizon = 0;

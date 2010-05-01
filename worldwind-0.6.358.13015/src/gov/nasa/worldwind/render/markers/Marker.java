@@ -13,6 +13,7 @@ import gov.nasa.worldwind.render.DrawContext;
 /**
  * @author tag
  * @version $Id: Marker.java 12576 2009-09-10 16:17:20Z jterhorst $
+ * @comments ±ê×¢½Ó¿Ú¡£yecol.2010.4.25.s
  */
 public interface Marker
 {
