@@ -132,12 +132,12 @@ public class MeasureToolUsage extends ApplicationTemplate
 
     public static void main(String[] args)
     {
-    	/*Configuration.setValue(AVKey.INITIAL_LATITUDE, 47.15);
+    	Configuration.setValue(AVKey.INITIAL_LATITUDE, 47.15);
         Configuration.setValue(AVKey.INITIAL_LONGITUDE, -122.74);
         Configuration.setValue(AVKey.INITIAL_ALTITUDE, 300e3);
         Configuration.setValue(AVKey.INITIAL_PITCH, 60);
         Configuration.setValue(AVKey.INITIAL_HEADING, 155);
-        */
+        
         
         ApplicationTemplate.start("World Wind Measure Tool", MeasureToolUsage.AppFrame.class);
     }

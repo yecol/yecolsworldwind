@@ -381,6 +381,7 @@ public class MeasureToolPanel extends JPanel
         {
             public void actionPerformed(ActionEvent actionEvent)
             {
+            	System.out.println("<path>");//yecolsMark
                 measureTool.clear();
                 measureTool.setArmed(true);
             }
@@ -408,7 +409,11 @@ public class MeasureToolPanel extends JPanel
         {
             public void actionPerformed(ActionEvent actionEvent)
             {
+            	System.out.println("</path>");//yecolsMark
                 measureTool.setArmed(false);
+                for(int i=1;i<pointLabels.length;i++){
+                	System.out.println(pointLabels[i].getText());
+                }
             }
         });
         buttonPanel.add(endButton);
@@ -517,6 +522,7 @@ public class MeasureToolPanel extends JPanel
     private void fillPointsPanel()
     {
         int i = 0;
+        
         if (measureTool.getPositions() != null)
         {
             for (LatLon pos : measureTool.getPositions())
@@ -524,9 +530,10 @@ public class MeasureToolPanel extends JPanel
                 if (i == this.pointLabels.length)
                     break;
 
-                String las = String.format("Lat %7.4f\u00B0", pos.getLatitude().getDegrees());
-                String los = String.format("Lon %7.4f\u00B0", pos.getLongitude().getDegrees());
+                String las = String.format("<Lat>%7.4f</Lat>", pos.getLatitude().getDegrees());
+                String los = String.format("<Lon>%7.4f</Lon>", pos.getLongitude().getDegrees());
                 pointLabels[i++].setText(las + "  " + los);
+             
             }
         }
         // Clear remaining labels

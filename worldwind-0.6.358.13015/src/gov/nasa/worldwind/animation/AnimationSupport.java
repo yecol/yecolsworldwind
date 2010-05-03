@@ -35,7 +35,7 @@ public class AnimationSupport
     }
 
     /**
-     * Calculate a scaled tiome based on the ratio of the angular distance between the <code>begin</code> and
+     * Calculate a scaled time based on the ratio of the angular distance between the <code>begin</code> and
      * <code>end</code> angles over the max value.
      *
      * @param begin the begin angle

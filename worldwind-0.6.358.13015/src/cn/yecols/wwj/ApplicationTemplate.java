@@ -144,7 +144,9 @@ public class ApplicationTemplate
 
         	ImageDataLayerUtil imageDataLayerUtil=new ImageDataLayerUtil();
         	
-            insertBeforePlacenames(this.getWwd(), imageDataLayerUtil.getLayer());
+            insertAfterPlacenames(this.getWwd(), imageDataLayerUtil.getLayer());
+            //insertBeforeCompass(this.getWwd(), imageDataLayerUtil.getLayer());
+            //this.getLayerPanel().update(this.getWwd());
             //this.getWwd().get
             
             /*

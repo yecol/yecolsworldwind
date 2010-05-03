@@ -66,7 +66,7 @@ public class YecolsTest extends ApplicationTemplate
             {
                 public void selected(SelectEvent event)
                 {
-                    //System.out.println(event.getEventAction() + " - " + event.getTopObject());
+                    System.out.println(event.getEventAction() + " - " + event.getTopObject());
                     
                     /*
                 	if (lastHighlitShape != null

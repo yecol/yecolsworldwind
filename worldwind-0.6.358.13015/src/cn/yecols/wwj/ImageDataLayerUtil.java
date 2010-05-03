@@ -9,18 +9,34 @@ public class ImageDataLayerUtil {
 	public ImageDataLayerUtil(){
 		
 		layer = new RenderableLayer();
+		layer.setName("yecol's images date");
+		layer.setPickEnabled(false);
 		
     	SurfaceImage si1 = new SurfaceImage("cn/yecols/images/ywwj001.jpg", Sector.fromDegrees(30.2613,30.2874,120.0785,120.1346));
-    	SurfaceImage si2 = new SurfaceImage("cn/yecols/images/ywwj002.jpg", Sector.fromDegrees(30.2608,30.2873,120.1352,120.1936));
-    	SurfaceImage si3 = new SurfaceImage("cn/yecols/images/ywwj003.jpg", Sector.fromDegrees(30.2414,30.2591,120.0795,120.1186));
-    	SurfaceImage si4 = new SurfaceImage("cn/yecols/images/ywwj004.jpg", Sector.fromDegrees(30.2426,30.2779,120.0579,120.1356));
-    	SurfaceImage si5 = new SurfaceImage("cn/yecols/images/ywwj005.jpg", Sector.fromDegrees(30.2347,30.2642,120.0672,120.1317));
+    	SurfaceImage si2 = new SurfaceImage("cn/yecols/images/ywwj002.jpg", Sector.fromDegrees(30.2613,30.2884,120.1304,120.1899));
     	
-        layer.addRenderable(si1);
-        layer.addRenderable(si2);
+    	SurfaceImage si5 = new SurfaceImage("cn/yecols/images/ywwj005.jpg", Sector.fromDegrees(30.2347,30.2642,120.0672,120.1317));
+    	SurfaceImage si6 = new SurfaceImage("cn/yecols/images/ywwj006.jpg", Sector.fromDegrees(30.2641,30.2888,120.1862,120.2393));
+    	SurfaceImage si7 = new SurfaceImage("cn/yecols/images/ywwj007.jpg", Sector.fromDegrees(30.2389,30.2661,120.1274,120.1870));
+    	SurfaceImage si8 = new SurfaceImage("cn/yecols/images/ywwj008.jpg", Sector.fromDegrees(30.2421,30.2678,120.1805,120.2407));
+    	SurfaceImage si9 = new SurfaceImage("cn/yecols/images/ywwj009.jpg", Sector.fromDegrees(30.2154,30.2445,120.0709,120.1369));
+    	SurfaceImage si10 = new SurfaceImage("cn/yecols/images/ywwj010.jpg", Sector.fromDegrees(30.2182,30.2414,120.1368,120.1883));    
+    	//SurfaceImage si9 = new SurfaceImage("cn/yecols/images/ywwj009.jpg", Sector.fromDegrees(30.2182,30.2414,120.1378,120.1883));
+    	//  SurfaceImage si9 = new SurfaceImage("cn/yecols/images/ywwj009.jpg", Sector.fromDegrees(30.2154,30.2445,120.0731,120.1362));
+    	SurfaceImage si11 = new SurfaceImage("cn/yecols/images/ywwj011.jpg", Sector.fromDegrees(30.1926,30.2214,120.1136,120.1768));    
+    	
+        layer.addRenderable(si11);
+        layer.addRenderable(si10);
         //layer.addRenderable(si3);
         //layer.addRenderable(si4);
+        layer.addRenderable(si9);
+        layer.addRenderable(si8); 
+        layer.addRenderable(si7);
+        layer.addRenderable(si6);
         layer.addRenderable(si5);
+        layer.addRenderable(si2);
+        layer.addRenderable(si1);
+        
 	}
 	
 	public RenderableLayer getLayer(){
