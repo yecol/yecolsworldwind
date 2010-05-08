@@ -4,7 +4,7 @@ as represented by the Administrator of the
 National Aeronautics and Space Administration.
 All Rights Reserved.
 */
-package gov.nasa.worldwind.examples;
+package cn.yecols.wwj;
 
 import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.avlist.AVKey;
@@ -18,7 +18,10 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.*;
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -55,8 +58,6 @@ public class MeasureToolPanel extends JPanel
     private JLabel heightLabel;
     private JLabel headingLabel;
     private JLabel centerLabel;
-    
-    private PrintWriter out;
 
     private static ArrayList<Position> LINE = new ArrayList<Position>();
     private static ArrayList<Position> PATH = new ArrayList<Position>();
@@ -75,19 +76,12 @@ public class MeasureToolPanel extends JPanel
         POLYGON.add(Position.fromDegrees(44, 7, 0));
     }
 
-    public MeasureToolPanel(WorldWindow wwdObject, MeasureTool measureToolObject)
+    public MeasureToolPanel(WorldWindow wwdObject, MeasureTool measureToolObject, PrintWriter out)
     {
         super(new BorderLayout());
         this.wwd = wwdObject;
         this.measureTool = measureToolObject;
-        this.makePanel(new Dimension(200, 300));
-        
-        try {
-			out=new PrintWriter(new FileWriter("xujb.txt"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        this.makePanel(new Dimension(200, 300),out);
 
         // Handle measure tool events
         measureTool.addPropertyChangeListener(new PropertyChangeListener()
@@ -137,7 +131,7 @@ public class MeasureToolPanel extends JPanel
         return this.measureTool;
     }
 
-    private void makePanel(Dimension size)
+    private void makePanel(Dimension size, final PrintWriter out)
     {
         // Shape combo
         JPanel shapePanel = new JPanel(new GridLayout(1, 2, 5, 5));
@@ -391,7 +385,7 @@ public class MeasureToolPanel extends JPanel
         {
             public void actionPerformed(ActionEvent actionEvent)
             {
-            	out.println("<path>");//yecolsMark
+            	out.println("<path>");
                 //measureTool.clear();
                 measureTool.setArmed(true);
             }
@@ -425,7 +419,7 @@ public class MeasureToolPanel extends JPanel
                 	out.println(pointLabels[i].getText());
                 	
                 }
-                out.println("</path>");//yecolsMark
+                out.println("</path>");
             }
         });
         buttonPanel.add(endButton);
@@ -542,9 +536,11 @@ public class MeasureToolPanel extends JPanel
                 if (i == this.pointLabels.length)
                     break;
 
-                String las = String.format("<Lat>%7.4f</Lat>", pos.getLatitude().getDegrees());
-                String los = String.format("<Lon>%7.4f</Lon>", pos.getLongitude().getDegrees());
-                pointLabels[i++].setText(las + "  " + los);
+                String las = String.format("%7.4f", pos.getLatitude().getDegrees());
+                String los = String.format("%7.4f", pos.getLongitude().getDegrees());
+                
+                //<position lat="30.2600" lon="120.0720" />
+                pointLabels[i++].setText("<position lat=\""+las+"\" lon=\""+los+"\" />");
              
             }
         }
