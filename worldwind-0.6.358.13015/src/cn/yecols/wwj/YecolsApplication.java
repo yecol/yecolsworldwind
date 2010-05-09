@@ -32,25 +32,19 @@ import java.util.ArrayList;
  * @see gov.nasa.worldwind.util.measure.MeasureToolController
  * @see MeasureToolPanel
  */
-public class MeasureToolUsage extends ApplicationTemplate {
+public class YecolsApplication extends ApplicationTemplate {
 	public static class AppFrame extends ApplicationTemplate.AppFrame {
-		private int lastTabIndex = -1;
-		private final JTabbedPane tabbedPane = new JTabbedPane();
+		//private int lastTabIndex = -1;
+		//private final JTabbedPane tabbedPane = new JTabbedPane();
+		private final JPanel leftJPanel=new JPanel();
 		private TerrainProfileLayer profile = new TerrainProfileLayer();
 		private PropertyChangeListener measureToolListener = new MeasureToolListener();
 
-		private PrintWriter printWriter;// yecols.util to produce xml.
+		//private PrintWriter printWriter;// yecols.util to produce xml.
 
 		public AppFrame() {
 
 			super(true, false, false); // no layer panel
-
-			try {
-				printWriter = new PrintWriter(new FileWriter("xujb.txt"),true);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 
 			// Add terrain profile layer
 			profile.setEventSource(getWwd());
@@ -59,9 +53,9 @@ public class MeasureToolUsage extends ApplicationTemplate {
 			insertBeforePlacenames(getWwd(), profile);
 
 			// Add + tab
-			tabbedPane.add(new JPanel());
-			tabbedPane.setTitleAt(0, "+");
-			tabbedPane.addChangeListener(new ChangeListener() {
+			//tabbedPane.add(new JPanel());
+			//tabbedPane.setTitleAt(0, "+");
+			/*tabbedPane.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent changeEvent) {
 					if (tabbedPane.getSelectedIndex() == 0) {
 						// Add new measure tool in a tab when '+' selected
@@ -78,18 +72,18 @@ public class MeasureToolUsage extends ApplicationTemplate {
 						switchMeasureTool();
 					}
 				}
-			});
+			});*/
 
 			// Add measure tool control panel to tabbed pane
 			MeasureTool measureTool = new MeasureTool(this.getWwd());
 			measureTool.setController(new MeasureToolController());
-			tabbedPane.add(new MeasureToolPanel(this.getWwd(), measureTool,printWriter));
-			//tabbedPane.add(new LeftControlPanel(this.getWwd(), measureTool));
-			tabbedPane.setTitleAt(1, "1");
-			tabbedPane.setSelectedIndex(1);
-			switchMeasureTool();
+			//leftJPanel.add(new MeasureToolPanel(this.getWwd(), measureTool,printWriter));
+			leftJPanel.add(new LeftControlPanel(this.getWwd(), measureTool));
+			//leftJPanel.setTitleAt(1, "1");
+			//leftJPanel.setSelectedIndex(1);
+			//switchMeasureTool();
 
-			this.getContentPane().add(tabbedPane, BorderLayout.WEST);
+			this.getContentPane().add(leftJPanel, BorderLayout.WEST);
 			this.pack();
 		}
 
@@ -107,7 +101,7 @@ public class MeasureToolUsage extends ApplicationTemplate {
 			}
 		}
 
-		private void switchMeasureTool() {
+		/*private void switchMeasureTool() {
 			// Disarm last measure tool when changing tab and switching tool
 			if (lastTabIndex != -1) {
 				MeasureTool mt = ((MeasureToolPanel) tabbedPane
@@ -121,7 +115,7 @@ public class MeasureToolUsage extends ApplicationTemplate {
 					.getComponentAt(lastTabIndex)).getMeasureTool();
 			mt.addPropertyChangeListener(measureToolListener);
 			updateProfile(mt);
-		}
+		}*/
 
 		private void updateProfile(MeasureTool mt) {
 			ArrayList<? extends LatLon> positions = mt.getPositions();
@@ -142,8 +136,8 @@ public class MeasureToolUsage extends ApplicationTemplate {
 		// Configuration.setValue(AVKey.INITIAL_PITCH, 60);
 		// Configuration.setValue(AVKey.INITIAL_HEADING, 155);
 
-		ApplicationTemplate.start("World Wind Measure Tool",
-				MeasureToolUsage.AppFrame.class);
+		ApplicationTemplate.start("º¼ÖÝ¾°ÇøµØÍ¼",
+				YecolsApplication.AppFrame.class);
 		System.out.println("application begin.");
 	}
 

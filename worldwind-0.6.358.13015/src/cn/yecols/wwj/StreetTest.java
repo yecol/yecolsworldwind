@@ -13,7 +13,7 @@ public class StreetTest {
 		// TODO Auto-generated method stub
 		StreetsDataReader streetsDataReader=new StreetsDataReader();
 		try {
-			streetsDataReader.ReadStreetData();
+			streetsDataReader.ReadStreetsData();
 		} catch (SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -984,7 +984,7 @@ public class MeasureTool extends AVListImpl implements Disposable
 
     // *** Editing shapes ***
 
-    /** Add a control point to the current measure shape at the cuurrent WorldWindow position. */
+    /** Add a control point to the current measure shape at the current WorldWindow position. */
     public void addControlPoint()
     {
         Position curPos = this.wwd.getCurrentPosition();
@@ -1040,6 +1040,45 @@ public class MeasureTool extends AVListImpl implements Disposable
         this.firePropertyChange(EVENT_POSITION_ADD, null, curPos);
         this.wwd.redraw();
     }
+    
+    /**Yecol's add control Point**/
+    public void addControlPoint(LatLon latlon)
+    {
+        Position curPos = new Position(latlon, 0);
+        if (curPos == null)
+            return;
+
+        if (!this.measureShapeType.equals(SHAPE_POLYGON) || this.positions.size() <= 1)
+            {
+                // Line, path or polygons with less then two points
+                this.positions.add(curPos);
+                addControlPoint(this.positions.get(this.positions.size() - 1), "PositionIndex",
+                    this.positions.size() - 1);
+                if (this.measureShapeType.equals(SHAPE_POLYGON) && this.positions.size() == 2)
+                {
+                    // Once we have two points of a polygon, add an extra position
+                    // to loop back to the first position and have a closed shape
+                    this.positions.add(this.positions.get(0));
+                }
+                if (this.measureShapeType.equals(SHAPE_LINE) && this.positions.size() > 1)
+                {
+                    // Two points on a line, update line heading info
+                    this.shapeOrientation = LatLon.greatCircleAzimuth(this.positions.get(0), this.positions.get(1));
+                }
+            }
+            else
+            {
+                // For polygons with more then 2 points, the last position is the same as the first, so insert before it
+                this.positions.add(positions.size() - 1, curPos);
+                addControlPoint(this.positions.get(this.positions.size() - 2), "PositionIndex",
+                    this.positions.size() - 2);
+            }
+        // Update screen shapes
+        updateMeasureShape();
+        this.firePropertyChange(EVENT_POSITION_ADD, null, curPos);
+        this.wwd.redraw();
+    }
+    
 
     /** Remove the last control point from the current measure shape. */
     public void removeControlPoint()

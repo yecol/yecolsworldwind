@@ -21,14 +21,10 @@ public class ImageDataLayerUtil {
     	SurfaceImage si8 = new SurfaceImage("cn/yecols/images/ywwj008.jpg", Sector.fromDegrees(30.2421,30.2678,120.1805,120.2407));
     	SurfaceImage si9 = new SurfaceImage("cn/yecols/images/ywwj009.jpg", Sector.fromDegrees(30.2154,30.2445,120.0709,120.1369));
     	SurfaceImage si10 = new SurfaceImage("cn/yecols/images/ywwj010.jpg", Sector.fromDegrees(30.2182,30.2414,120.1368,120.1883));    
-    	//SurfaceImage si9 = new SurfaceImage("cn/yecols/images/ywwj009.jpg", Sector.fromDegrees(30.2182,30.2414,120.1378,120.1883));
-    	//  SurfaceImage si9 = new SurfaceImage("cn/yecols/images/ywwj009.jpg", Sector.fromDegrees(30.2154,30.2445,120.0731,120.1362));
     	SurfaceImage si11 = new SurfaceImage("cn/yecols/images/ywwj011.jpg", Sector.fromDegrees(30.1926,30.2214,120.1136,120.1768));    
     	
         layer.addRenderable(si11);
         layer.addRenderable(si10);
-        //layer.addRenderable(si3);
-        //layer.addRenderable(si4);
         layer.addRenderable(si9);
         layer.addRenderable(si8); 
         layer.addRenderable(si7);
