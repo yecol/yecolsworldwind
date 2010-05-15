@@ -1,8 +1,10 @@
 package cn.yecols.wwj;
 
+import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.geom.LatLon;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.util.measure.MeasureTool;
+import gov.nasa.worldwind.util.measure.MeasureToolController;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,14 +19,19 @@ import org.jgrapht.graph.*;
 
 public class StreetsDataReader {
 	private static File file;
+	private static WorldWindow wwd;
 	private static DocumentBuilder builder;
 	private static WeightedGraph<LatLon, DefaultWeightedEdge> streetsGraph;
 	private LatLon beginPosition, endPosition;
 	private boolean tar;
+	private LengthMeasurer lengthMeasurer;
 
-	public StreetsDataReader() {
+	public StreetsDataReader(WorldWindow wwd) {
 		file = new File("src/cn/yecols/geoHz.xml");
+		this.wwd=wwd;
 		streetsGraph = new SimpleWeightedGraph(DefaultWeightedEdge.class);
+		lengthMeasurer = new LengthMeasurer();
+		lengthMeasurer.setFollowTerrain(true);
 	}
 
 	public WeightedGraph ReadStreetsData() throws SAXException, IOException {
@@ -45,7 +52,12 @@ public class StreetsDataReader {
 			for (int i = 0; i < paths.getLength(); i++) {
 				Node path = paths.item(i);
 				// 对应一个<path>
-				//MeasureTool measureTool = new MeasureTool();
+				MeasureTool measureTool = new MeasureTool(wwd);
+				measureTool.setController(new MeasureToolController());
+				measureTool.setFollowTerrain(true);
+				measureTool.setMeasureShapeType(MeasureTool.SHAPE_PATH);
+				measureTool.setShowControlPoints(false);
+				measureTool.setArmed(true);
 
 				if (path instanceof Element) {
 					NodeList points = path.getChildNodes();
@@ -62,6 +74,7 @@ public class StreetsDataReader {
 												.getAttribute("lon")));
 								streetsGraph.addVertex(beginPosition);
 								tar = true;
+								measureTool.addControlPoint(beginPosition);
 							} else {
 								endPosition = new LatLon(Double
 										.parseDouble(((Element) points.item(j))
@@ -69,8 +82,27 @@ public class StreetsDataReader {
 										.parseDouble(((Element) points.item(j))
 												.getAttribute("lon")));
 								streetsGraph.addVertex(endPosition);
-								streetsGraph
-										.addEdge(beginPosition, endPosition);
+								measureTool.addControlPoint(endPosition);
+								
+								lengthMeasurer.clearPositons();
+								//System.out.println(lengthMeasurer.getPositions().toString());
+								
+								lengthMeasurer.addLine(beginPosition, endPosition);
+								//System.out.println(lengthMeasurer.getPositions().toString());
+								
+								
+							
+								System.out.println(lengthMeasurer.computeLength(wwd.getModel().getGlobe(), true));
+								//streetsGraph
+								//		.addEdge(beginPosition, endPosition,lengthMeasurer.computeLength(wwd.getModel().getGlobe(), true));
+								//streetsGraph.addEdge(sourceVertex, targetVertex)
+								try{
+							    streetsGraph.setEdgeWeight(streetsGraph
+										.addEdge(beginPosition, endPosition), lengthMeasurer.computeLength(wwd.getModel().getGlobe(), true));
+								}
+								catch(Exception e){
+									System.out.println("Edge exists already.");
+								}
 								beginPosition = endPosition;
 							}
 
@@ -79,13 +111,10 @@ public class StreetsDataReader {
 							System.out.println(((Element) points.item(j))
 									.getAttribute("lon"));
 
-							// streetsGraph.addEdge(sourceVertex, targetVertex,
-							// e)
-							// streetsGraph.
-
 						}
 					}
 				}
+				measureTool.setArmed(false);
 			}
 
 		} catch (ParserConfigurationException e) {
