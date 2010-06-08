@@ -2,7 +2,6 @@ package cn.yecols.wwj;
 
 import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.geom.LatLon;
-import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.util.measure.MeasureTool;
 import gov.nasa.worldwind.util.measure.MeasureToolController;
 
@@ -17,6 +16,7 @@ import org.xml.sax.SAXException;
 import org.jgrapht.*;
 import org.jgrapht.graph.*;
 
+//从配置文件读取道路文件到程序
 public class StreetsDataReader {
 	private static File file;
 	private static WorldWindow wwd;
@@ -43,14 +43,13 @@ public class StreetsDataReader {
 			Element root = xmldoc.getDocumentElement();
 			// 获得根元素。对应<paths>。
 
-			// System.out.println(root.hasChildNodes());
 			NodeList paths = root.getChildNodes();
 			// 路径列表。对应一个<path>列表。
 
 			tar = false;
-
 			for (int i = 0; i < paths.getLength(); i++) {
 				Node path = paths.item(i);
+				tar = false;
 				// 对应一个<path>
 				MeasureTool measureTool = new MeasureTool(wwd);
 				measureTool.setController(new MeasureToolController());
@@ -61,8 +60,6 @@ public class StreetsDataReader {
 
 				if (path instanceof Element) {
 					NodeList points = path.getChildNodes();
-					// 对应一个<position>列表
-					// System.out.println(points.toString());
 
 					for (int j = 0; j < points.getLength(); j++) {
 						if (points.item(j) instanceof Element) {
@@ -75,6 +72,7 @@ public class StreetsDataReader {
 								streetsGraph.addVertex(beginPosition);
 								tar = true;
 								measureTool.addControlPoint(beginPosition);
+								// measureTool.
 							} else {
 								endPosition = new LatLon(Double
 										.parseDouble(((Element) points.item(j))
@@ -83,27 +81,28 @@ public class StreetsDataReader {
 												.getAttribute("lon")));
 								streetsGraph.addVertex(endPosition);
 								measureTool.addControlPoint(endPosition);
-								
+
 								lengthMeasurer.clearPositons();
-								//System.out.println(lengthMeasurer.getPositions().toString());
+
+								lengthMeasurer.addLine(beginPosition,
+										endPosition);
 								
-								lengthMeasurer.addLine(beginPosition, endPosition);
-								//System.out.println(lengthMeasurer.getPositions().toString());
-								
-								
-							
-								System.out.println(lengthMeasurer.computeLength(wwd.getModel().getGlobe(), true));
-								//streetsGraph
-								//		.addEdge(beginPosition, endPosition,lengthMeasurer.computeLength(wwd.getModel().getGlobe(), true));
-								//streetsGraph.addEdge(sourceVertex, targetVertex)
-								try{
-							    streetsGraph.setEdgeWeight(streetsGraph
-										.addEdge(beginPosition, endPosition), lengthMeasurer.computeLength(wwd.getModel().getGlobe(), true));
-								}
-								catch(Exception e){
+
+								System.out.println(lengthMeasurer
+										.computeLength(wwd.getModel()
+												.getGlobe(), true));
+								try {
+									streetsGraph.setEdgeWeight(
+											streetsGraph.addEdge(beginPosition,
+													endPosition),
+											lengthMeasurer.computeLength(wwd
+													.getModel().getGlobe(),
+													true));
+								} catch (Exception e) {
 									System.out.println("Edge exists already.");
 								}
 								beginPosition = endPosition;
+
 							}
 
 							System.out.println(((Element) points.item(j))

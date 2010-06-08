@@ -125,7 +125,10 @@ public class LatLon
     	//直线插点。在value1和value2中间。其中amount为权重值。
     	//如果 amount<=0 interpolate=value1;
     	//如果 amount>=1 interpolate=value2;
-    	//0.5 中点。   
+    	//0.5 中点。 
+    	if(amount>=1){
+    		return value2;
+    	}
     	
         if (value1 == null || value2 == null)
         {
@@ -866,6 +869,16 @@ public class LatLon
     public static boolean equals(LatLon a, LatLon b)
     {
         return a.getLatitude().equals(b.getLatitude()) && a.getLongitude().equals(b.getLongitude());
+    }
+    
+    public static boolean equals4bits(LatLon a, LatLon b)
+    {
+        return Math.abs(a.getLatitude().degrees-b.getLatitude().degrees)<=0.0001 && Math.abs(a.getLongitude().degrees-b.getLongitude().degrees)<=0.0001;
+    }
+    
+    public static boolean equals3bits(LatLon a, LatLon b)
+    {
+        return Math.abs(a.getLatitude().degrees-b.getLatitude().degrees)<=0.001 && Math.abs(a.getLongitude().degrees-b.getLongitude().degrees)<=0.001;
     }
 
     @Override

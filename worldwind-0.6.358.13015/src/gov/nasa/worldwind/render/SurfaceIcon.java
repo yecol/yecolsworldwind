@@ -41,6 +41,7 @@ public class SurfaceIcon extends AbstractSurfaceRenderable implements Movable
     protected int imageWidth = 32;
     protected int imageHeight = 32;
 
+    
     public SurfaceIcon(Object imageSource)
     {
         this(imageSource, null);

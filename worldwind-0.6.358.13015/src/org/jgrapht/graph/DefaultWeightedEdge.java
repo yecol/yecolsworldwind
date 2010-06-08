@@ -59,6 +59,8 @@ public class DefaultWeightedEdge
     //~ Instance fields --------------------------------------------------------
 
     double weight = WeightedGraph.DEFAULT_EDGE_WEIGHT;
+    
+    int translation = 0;
 
     //~ Methods ----------------------------------------------------------------
 
@@ -68,9 +70,21 @@ public class DefaultWeightedEdge
      *
      * @return weight of this edge
      */
-    protected double getWeight()
+    public double getWeight()
     {
         return weight;
+    }
+    
+    public int getTrans(){
+    	return translation;
+    }
+    
+    public void setTrans(int trans){
+    	translation=trans;
+    }
+    
+    public void addTrans(){
+    	translation+=1;
     }
 }
 
