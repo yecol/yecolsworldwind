@@ -66,9 +66,14 @@ public class DefaultEdge
      *
      * @return source of this edge
      */
-    protected Object getSource()
+    public Object getSource()
     {
         return source;
+    }
+
+    public void setSource(Object src)
+    {
+        source=src;
     }
 
     /**
@@ -77,9 +82,13 @@ public class DefaultEdge
      *
      * @return target of this edge
      */
-    protected Object getTarget()
+    public Object getTarget()
     {
         return target;
+    }
+    
+    public void setTarget(Object tar){
+    	target=tar;
     }
 
     public String toString()

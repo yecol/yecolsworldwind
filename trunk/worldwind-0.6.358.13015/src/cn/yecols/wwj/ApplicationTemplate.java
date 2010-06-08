@@ -145,22 +145,6 @@ public class ApplicationTemplate
         	ImageDataLayerUtil imageDataLayerUtil=new ImageDataLayerUtil();
         	
             insertAfterPlacenames(this.getWwd(), imageDataLayerUtil.getLayer());
-            //insertBeforeCompass(this.getWwd(), imageDataLayerUtil.getLayer());
-            //this.getLayerPanel().update(this.getWwd());
-            //this.getWwd().get
-            
-            /*
-            this.getWwd().addSelectListener(new SelectListener()
-            {
-                private BasicDragger dragger = new BasicDragger(getWwd());
-
-                public void selected(SelectEvent event)
-                {
-                    // Delegate dragging computations to a dragger.
-                    this.dragger.selected(event);
-                }
-            });*/
-            //this.getWwd().addSelectListener(listener)
         }
 
         protected AppPanel createAppPanel(Dimension canvasSize, boolean includeStatusBar)

@@ -1,15 +1,12 @@
-/*
-Copyright (C) 2001, 2006 United States Government
-as represented by the Administrator of the
-National Aeronautics and Space Administration.
-All Rights Reserved.
-*/
-package gov.nasa.worldwind.render;
+
+package cn.yecols.obj;
 
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
+import gov.nasa.worldwind.render.DrawContext;
+import gov.nasa.worldwind.render.Renderable;
 import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.util.measure.LengthMeasurer;
 
@@ -17,11 +14,8 @@ import javax.media.opengl.GL;
 import java.awt.*;
 import java.util.*;
 
-/**
- * @author tag
- * @version $Id: Polyline.java 12999 2010-01-09 11:14:41Z tgaskins $
- */
-public class Polyline extends AVListImpl implements Renderable, Movable, Restorable
+//标注路径的绿线
+public class Path extends AVListImpl implements Renderable, Movable, Restorable
 {
     public final static int GREAT_CIRCLE = 0;
     public final static int LINEAR = 1;
@@ -36,14 +30,14 @@ public class Polyline extends AVListImpl implements Renderable, Movable, Restora
     private Vec4 referenceCenterPoint;
     private Position referenceCenterPosition = Position.ZERO;
     private int antiAliasHint = GL.GL_FASTEST;
-    private Color color = Color.WHITE;
-    private double lineWidth = 1;
+    private Color color = Color.GREEN;
+    private double lineWidth = 3;
     private boolean filled = false; // makes it a polygon
     private boolean closed = false; // connect last point to first
-    private boolean followTerrain = false;
+    private boolean followTerrain = true;
     private double offset = 0;
     private double terrainConformance = 10;
-    private int pathType = GREAT_CIRCLE;
+    private int pathType = LINEAR;
     private ArrayList<ArrayList<Vec4>> currentSpans;
     private short stipplePattern = (short) 0xAAAA;
     private int stippleFactor = 0;
@@ -80,21 +74,39 @@ public class Polyline extends AVListImpl implements Renderable, Movable, Restora
 
     protected HashMap<Globe, ExtentInfo> extents = new HashMap<Globe, ExtentInfo>(2); // usually only 1, but few at most
 
-    public Polyline()
+    public Path()
     {
         this.setPositions(null);
         this.measurer.setFollowTerrain(this.followTerrain);
         this.measurer.setPathType(this.pathType);
     }
 
-    public Polyline(Iterable<? extends Position> positions)
+    public Path(Iterable<? extends Position> positions)
     {
         this.setPositions(positions);
         this.measurer.setFollowTerrain(this.followTerrain);
         this.measurer.setPathType(this.pathType);
     }
+    
+    public Path(LatLon ll1,LatLon ll2){
+    	Position begin=new Position(ll1,0);
+    	Position end = new Position(ll2,0);
+    	this.reset();
+        this.positions = new ArrayList<Position>();
+        this.extents.clear();
+        if (begin != null&&end!=null)
+        {
+            
+            this.positions.add(begin);
+            this.positions.add(end);
+            this.measurer.setPositions(this.positions);
+        }
+        this.measurer.setFollowTerrain(this.followTerrain);
+        this.measurer.setPathType(this.pathType);
+        System.out.println(this.positions.size());
+    }
 
-    public Polyline(Iterable<? extends LatLon> positions, double elevation)
+    public Path(Iterable<? extends LatLon> positions, double elevation)
     {
         this.setPositions(positions, elevation);
         this.measurer.setFollowTerrain(this.followTerrain);
