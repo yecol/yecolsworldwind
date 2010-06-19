@@ -5,6 +5,7 @@ import gov.nasa.worldwind.layers.RenderableLayer;
 import gov.nasa.worldwind.render.SurfaceImage;
 
 public class ImageDataLayerUtil {
+	//一个加载表面图像的类，加载了杭州地区的详细地图。用于图像精度优化。
 	private RenderableLayer layer;
 	public ImageDataLayerUtil(){
 		

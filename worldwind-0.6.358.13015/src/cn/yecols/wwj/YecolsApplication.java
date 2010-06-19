@@ -24,34 +24,24 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/**
- * Example usage of MeasureTool, MeasureToolController and MeasureToolPanel.
- * 
- * @author Patrick Murris
- * @version $Id: MeasureToolUsage.java 12530 2009-08-29 17:55:54Z jterhorst $
- * @see gov.nasa.worldwind.util.measure.MeasureTool
- * @see gov.nasa.worldwind.util.measure.MeasureToolController
- * @see MeasureToolPanel
- */
-public class YecolsApplication extends ApplicationTemplate {
-	public static class AppFrame extends ApplicationTemplate.AppFrame {
-		//private int lastTabIndex = -1;
-		//private final JTabbedPane tabbedPane = new JTabbedPane();
-		
-		private final JPanel leftJPanel=new JPanel();
-		private TerrainProfileLayer profile = new TerrainProfileLayer();
-		private PropertyChangeListener measureToolListener = new MeasureToolListener();
 
-		//private PrintWriter printWriter;// yecols.util to produce xml.
+public class YecolsApplication extends ApplicationTemplate {
+	//继承自应用程序模板类
+	public static class AppFrame extends ApplicationTemplate.AppFrame {
+		
+		//集成AppFrame
+		private final JPanel leftJPanel=new JPanel();
+		private TerrainProfileLayer profile = new TerrainProfileLayer();//地形资料小面板
+		private PropertyChangeListener measureToolListener = new MeasureToolListener();
 
 		public AppFrame() {
 
-			super(true, false, false); 
+			super(true, false, false); //三个参数表明只需要引用其中的WorldWindow面板
 			
-			profile.setEventSource(getWwd());
-			profile.setFollow(TerrainProfileLayer.FOLLOW_PATH);
-			profile.setShowProfileLine(false);
-			insertBeforePlacenames(getWwd(), profile);
+			profile.setEventSource(getWwd());					//事件来源
+			profile.setFollow(TerrainProfileLayer.FOLLOW_PATH);	//沿地表起伏
+			profile.setShowProfileLine(false);					
+			insertBeforePlacenames(getWwd(), profile);			//添加小面板
 
 			
 			MeasureTool measureTool = new MeasureTool(this.getWwd());
@@ -91,13 +81,12 @@ public class YecolsApplication extends ApplicationTemplate {
 	}
 
 	public static void main(String[] args) {
-		Configuration.setValue(AVKey.INITIAL_LATITUDE, 30.2387);
-		Configuration.setValue(AVKey.INITIAL_LONGITUDE, 120.1472);
-		Configuration.setValue(AVKey.INITIAL_ALTITUDE, 20e3);
+		Configuration.setValue(AVKey.INITIAL_LATITUDE, 30.2387);		//窗口中点纬度
+		Configuration.setValue(AVKey.INITIAL_LONGITUDE, 120.1472);		//窗口中点经度
+		Configuration.setValue(AVKey.INITIAL_ALTITUDE, 20e3);			//视角高度
 
-		ApplicationTemplate.start("杭州景区地图",
+		ApplicationTemplate.start("基于NASA WorldWind的GIS融合系统研究",
 				YecolsApplication.AppFrame.class);
-		System.out.println("application begin.");
 	}
 
 }

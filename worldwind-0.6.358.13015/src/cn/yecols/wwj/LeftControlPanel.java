@@ -60,20 +60,19 @@ import gov.nasa.worldwind.view.firstperson.FlyToFlyViewAnimator;
 import gov.nasa.worldwind.view.orbit.BasicOrbitView;
 
 public class LeftControlPanel extends JPanel {
-	private final WorldWindow wwd;
-	private final MeasureTool measureTool;
-	private BasicOrbitView bview;
-	private WeightedGraph<LatLon, DefaultWeightedEdge> g;
+	private final WorldWindow wwd;								//地球窗口
+	private final MeasureTool measureTool;						//测量工具类
+	private WeightedGraph<LatLon, DefaultWeightedEdge> g;		//街道网
 
 	// ---------------------辅助工具类----------------------------------
-	private PlacesDataLayerUtil placesDataLayerUtil;
+	private PlacesDataLayerUtil placesDataLayerUtil;			//地名图层工具类
 
 	// ----------------------------------------------------------------
-	private RenderableLayer annotationLayer;
-	private boolean attachedAnnotationLayer=false;
+	private RenderableLayer annotationLayer;					//标注图层，一直显示在上方
+	private boolean attachedAnnotationLayer=false;				//标示当前是否有标注图层
 
 	// ---------------------界面控件------------------------------------
-	private JButton loadStreetsData;
+	private JButton loadStreetsData;							
 	private JButton startPosition;
 	private JComboBox endPosition;
 	private JButton computeShortestPath;
@@ -100,19 +99,20 @@ public class LeftControlPanel extends JPanel {
 	private TimerTask simulatorsTimerTask;
 	private Timer periodTimer;
 
-	// ---------------------------------------------------
-	private int taskScale = 3;
-	private int taskBeginDelay = 1000;
-	private int taskPeriod = 2000;
+    // --------------------其他----------------------------------------
+	private int taskBeginDelay = 1000;			//模拟点时计划任务开始时延迟
+	private int taskPeriod = 2000;				//模拟点时计划任务的间隔
 	private static final Angle anglePitch=Angle.fromDegrees(30);
 	public BasicFlyView view;
 	public Position viewPosition;
+	public AlarmIcons ai;						//警报图标
 
 	public LeftControlPanel(WorldWindow wwdObject, MeasureTool measureToolObject) {
 		super(new BorderLayout());
 		this.wwd = wwdObject;
 		this.measureTool = measureToolObject;
 		annotationLayer = new RenderableLayer();
+		//为模拟点载入图标。
 		try {
 			simulatorImage = ImageIO.read(new File(
 					"src/cn/yecols/images/simulator.png"));
@@ -123,6 +123,7 @@ public class LeftControlPanel extends JPanel {
 		placesDataLayerUtil = new PlacesDataLayerUtil();
 		placesSum = placesDataLayerUtil.getSum();
 
+		//创建左面板，主要是控件的布局。
 		this.MakePanel(new Dimension(200, 300));
 
 		// 添加鼠标事件监听器，选择起点。
@@ -153,23 +154,11 @@ public class LeftControlPanel extends JPanel {
 							.MakePlaceAnnotation((Place) event.getTopObject()));
 
 				}
-				if (event.getEventAction().equals(SelectEvent.LEFT_CLICK)
-						&& event.getTopObject() instanceof Stop) {
-					DisplayAnnotation(Emergency
-							.MakeStopAnnotation((Stop) event.getTopObject()));
-					System.out.println("stop");
-
-				}
-				if (event.getEventAction().equals(SelectEvent.LEFT_CLICK)
-						&& event.getTopObject() instanceof Simulator) {
-					System.out.println("OK");
-				}
 				if (attachedAnnotationLayer==true&&event.getEventAction().equals(SelectEvent.LEFT_CLICK)
 						&& !(event.getTopObject() instanceof Simulator)&& !(event.getTopObject() instanceof Place)) {
 					annotationLayer.removeAllRenderables();
 					wwd.getModel().getLayers().remove(annotationLayer);
 					attachedAnnotationLayer=false;
-					System.out.println("yecol");
 				}
 				
 					
@@ -180,7 +169,7 @@ public class LeftControlPanel extends JPanel {
 	}
 
 	private void UpdatePositon() {
-		//刷新左侧信息面板
+		//更新地点信息
 		Position curPos = this.wwd.getCurrentPosition();
 		findSinglePathBegin = curPos.getLatLon();
 		InfoA("起点已选择，起点坐标为：\n" + findSinglePathBegin.toString());
@@ -196,31 +185,32 @@ public class LeftControlPanel extends JPanel {
 	}
 
 	private void MakePanel(Dimension dimension) {
-
+		//创建左边面板控件
+		
+		//---------------------信息显示面板-----------------------
 		infomation = new JTextArea("请先点击初始化。");
 		infomation.setWrapStyleWord(true);
 		JPanel dummyPanel = new JPanel(new BorderLayout());
 		dummyPanel.add(this.infomation, BorderLayout.NORTH);
-
-		// Put the name panel in a scroll bar.
 		this.scrollPane = new JScrollPane(dummyPanel);
 		this.scrollPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-
-		infoPanel = new JPanel(new GridLayout(0, 1, 0, 10));
+        infoPanel = new JPanel(new GridLayout(0, 1, 0, 10));
 		infoPanel.setBorder(new CompoundBorder(BorderFactory.createEmptyBorder(
 				9, 9, 9, 9), new TitledBorder("信息面板")));
 		infoPanel.setToolTipText("信息显示");
 		infoPanel.add(scrollPane);
 		
+		//---------------------图层控制面板-----------------------
 		layerPanel=new LayerPanel(wwd);
 		layerPanel.setMaximumSize(new Dimension(200, 200));
 		layerPanel.setPreferredSize(new Dimension(200, 200));
 		
 		
-		
+		//---------------------人群数量模拟控件-------------------
 		peopleInput=new JTextField();
 		peopleInputButton=new JButton("人群大约数量");
 		peopleInputButton.addActionListener(new ActionListener(){
+			//为按钮加入响应事件
 			public void actionPerformed(ActionEvent arg0) {
 				int peopleSum=Integer.parseInt(peopleInput.getText());
 				for(Layer l:wwd.getModel().getLayers()){
@@ -230,33 +220,46 @@ public class LeftControlPanel extends JPanel {
 				}
 				if(peopleSum<=Emergency.busOnlySum){
 					wwd.getModel().getLayers().add(ManyDataLayerUtil.Emergency(peopleSum));
+					if(ai!=null){
+						ai=null;
+						for(Layer l:wwd.getModel().getLayers()){
+							if(l.getName().equals("alarm icon"))
+								wwd.getModel().getLayers().remove(l);
+						}
+					}
 					InfoE("当前人流可通过公交疏散");
 				}
 				else if(peopleSum<=Emergency.allSum){
 					wwd.getModel().getLayers().add(ManyDataLayerUtil.Emergency(peopleSum));
+					if(ai!=null){
+						ai=null;
+						for(Layer l:wwd.getModel().getLayers()){
+							if(l.getName().equals("alarm icon"))
+								wwd.getModel().getLayers().remove(l);
+						}
+					}
 					InfoE("当前人流密度过大，需要添加临时送客点疏散");
 				}
 				else if(peopleSum>Emergency.alarmSum){
 					wwd.getModel().getLayers().add(ManyDataLayerUtil.Emergency(peopleSum));
-					InfoE("当前人流密度超过警戒阈值，需要大幅添加临时送客点和公交巴士车次疏散");
+					ai=new AlarmIcons(wwd);					
+					InfoE("当前人流密度超过警戒阈值，需要采取预警措施");
 				}
 				layerPanel.update(wwd);
 			}});
 		
-
+        //----------------------数据初始化面板-------------------------
 		JPanel initialPanel = new JPanel(new GridLayout(1, 2, 5, 5));
 		JPanel singlePanel = new JPanel(new GridLayout(1, 3, 5, 5));
-		// TODO Auto-generated method stub
 		loadStreetsData = new JButton("数据初始化");
 		loadStreetsData.addActionListener(new ActionListener() {
+			//点击初始化时，重建道路网
 			public void actionPerformed(ActionEvent event) {
-				System.out.println("loading streets data");
+				//System.out.println("loading streets data");
 				StreetsDataReader streetsDataReader = new StreetsDataReader(wwd);
 				try {
 					g = streetsDataReader.ReadStreetsData();
-					System.out.println(g.toString());
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 					InfoE("Failed to Read xml or build a weighted graph.");
 				}
@@ -265,34 +268,26 @@ public class LeftControlPanel extends JPanel {
 				InfoE("初始化完成");
 				layerPanel.update(wwd);
 			}
-
 		});
 
 		showPlaces = new JButton("显示景点");
 		showPlaces.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				// 标注景点
+				// 通过辅助类标注景点
 				try {
 					placesDataLayerUtil.MakePlacesLayerWithMarker();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				placesDataLayerUtil.Visualize(wwd);
-
-			
-
-				LayerList layers = wwd.getModel().getLayers();
-				for (Layer l : layers) {
-					System.out.println(l.getName());
-				}
 				layerPanel.update(wwd);
-
 			}
 		});
 
+		//-------------------最短路径控件-----------------------------
 		startPosition = new JButton("选择起点");
 		startPosition.addActionListener(new ActionListener() {
+			//从图中选择起点
 			public void actionPerformed(ActionEvent event) {
 				armed = true;
 				startPosition.setEnabled(false);
@@ -305,6 +300,7 @@ public class LeftControlPanel extends JPanel {
 			endPosition.addItem(p);
 		}
 		endPosition.addActionListener(new ActionListener() {
+			//从下拉框中获得终点
 			public void actionPerformed(ActionEvent event) {
 				findSinglePathEnd = ((Place) endPosition.getSelectedItem())
 						.getPlaceLocation();
@@ -315,10 +311,12 @@ public class LeftControlPanel extends JPanel {
 		computeShortestPath.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				if (findSinglePathBegin != null && findSinglePathEnd != null) {
+					//计算最短路径
 					simulator = new Simulator(findSinglePathBegin,
 							findSinglePathEnd, g, simulatorImage);
-					System.out.println(simulator.getCurrent().toString());
+					//加载路径到图上
 					ManyDataLayerUtil.LoadSimulatorPath(simulator, wwd);
+					//显示时间信息
 					InfoA(String.format("该路径距离约%.2f米\n步行约%.1f分钟", simulator
 							.getMiles(), simulator.getMiles() / 90));
 				} else
@@ -328,32 +326,32 @@ public class LeftControlPanel extends JPanel {
 			}
 		});
 
+		//----------------------------沿路径行走控件--------------------------------
 		simulateTourist = new JButton("沿路径行走");
 		simulateTourist.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent event) {
 				final ArrayList<Simulator> simulators = new ArrayList<Simulator>();
-				
+				//模拟对象
 					simulators.add(simulator);
-
+				//清空原有任务
 				if(periodTimer!=null){
 					periodTimer.cancel();
 				   
 				}
-				 periodTimer = null;
+				periodTimer = null;
 				simulatorsTimerTask = null;
+				//进行模拟
 				try {
 					periodTimer = new Timer();
 					simulatorsTimerTask = (TimerTask) new SimulatorsTimerTask(
 							wwd, simulators);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				periodTimer.scheduleAtFixedRate(simulatorsTimerTask,
 						taskBeginDelay, taskPeriod);
 				layerPanel.update(wwd);
-
 			}
 		});
 		
@@ -367,15 +365,12 @@ public class LeftControlPanel extends JPanel {
 					pathPoints.add((LatLon) e.getSource());
 				pathPoints.add(simulator.getEnd());
 				
-				
-				
 				viewPosition=wwd.getView().getEyePosition();
 				view=new BasicFlyView();
 				wwd.setView(view);
 				
 				wwd.getView().setEyePosition(new Position(simulator.getCurrent(),0));
 				System.out.println(wwd.getView().getEyePosition().toString());
-				//moveToLocation(new LatLon(20,-140));
 				for(LatLon ll:pathPoints){
 					System.out.println(ll.toString());
 				}
@@ -388,12 +383,10 @@ public class LeftControlPanel extends JPanel {
 					moveToLocation(pathPoints.get(i-1),pathPoints.get(i));
 					System.out.println("yecolsStep"+i+"    "+pathPoints.get(i).toString());
 				}
-			
-
-
 			}
 		});
 
+		//--------------------------停止模拟--------------------------------
 		simulateTourists = new JButton("停止行走");
 		simulateTourists.addActionListener(new ActionListener() {
 
@@ -413,30 +406,23 @@ public class LeftControlPanel extends JPanel {
 				
 		});
 
+		//-----------------------第一面板 NORTH--------------------------------------
 		JPanel outPanel = new JPanel(new GridLayout(3, 1, 5, 5));
 
 		initialPanel.add(loadStreetsData);
 		initialPanel.add(showPlaces);
 		outPanel.add(initialPanel);
 		outPanel.setToolTipText("控制面板");
-
-		this.add(outPanel, BorderLayout.NORTH);
+		
 		singlePanel.add(startPosition);
 		singlePanel.add(endPosition);
 		singlePanel.add(computeShortestPath);
-
 		outPanel.add(singlePanel);
         
 		JPanel simuPanel = new JPanel(new GridLayout(1, 2, 5, 5));
 		simuPanel.add(simulateTourist);
 		simuPanel.add(simulateTourists);
 		outPanel.add(simuPanel);
-		
-		JPanel emerPanel = new JPanel(new GridLayout(1, 2, 5, 5));
-		emerPanel.add(peopleInput);
-		emerPanel.add(peopleInputButton);
-		
-		
 		
 		JPanel outerPanel = new JPanel(new BorderLayout());
 		outerPanel.setBorder(new CompoundBorder(BorderFactory.createEmptyBorder(
@@ -449,10 +435,18 @@ public class LeftControlPanel extends JPanel {
 		
 		infoPanel.setMaximumSize(new Dimension(200, 200));
 		infoPanel.setPreferredSize(new Dimension(200, 200));
+		
+		
+		//--------------------------第二面板 CENTER--------------------------------
 		this.add(layerPanel,BorderLayout.CENTER);
 		
 		
-		//-------------------------------monitor begin
+		//------------------------第三面板SOUTH------------------------------------		
+		JPanel emerPanel = new JPanel(new GridLayout(1, 2, 5, 5));
+		emerPanel.add(peopleInput);
+		emerPanel.add(peopleInputButton);
+		
+		//-------------------------监控面板---------------------------------------
 		monitorPanel = new JPanel(new BorderLayout());
 		monitorPanel.setBorder(new CompoundBorder(BorderFactory.createEmptyBorder(
 				9, 9, 9, 9), new TitledBorder("监控面板")));
@@ -461,7 +455,6 @@ public class LeftControlPanel extends JPanel {
 		
 		VideoMoniter video = new VideoMoniter();
 		monitorPanel.add(video,BorderLayout.CENTER);
-		//monitorPanel.set
 		emerPanel.setBorder(BorderFactory.createEmptyBorder(
 				3, 3, 3, 3));
 		monitorPanel.add(emerPanel,BorderLayout.SOUTH);
@@ -470,21 +463,22 @@ public class LeftControlPanel extends JPanel {
 		monitorPanel.setPreferredSize(new Dimension(200, 300));
 		this.add(monitorPanel, BorderLayout.SOUTH);
 		video.play();
-		//------------------------------monitor end
 
 	}
 
 	private void InfoA(String info) {
+		//信息面板添加信息
 		this.infomation.append("\n" + info);
 		this.scrollPane.revalidate();
 		this.infoPanel.repaint();
 	}
 	private void InfoE(String info) {
+		//信息面板重写信息
 		this.infomation.setText(info);
 		this.scrollPane.revalidate();
 		this.infoPanel.repaint();
 	}
-	 void moveToLocation(LatLon ll1, LatLon ll2)
+	void moveToLocation(LatLon ll1, LatLon ll2)
 	 {
          if (ll1 == null)
          {

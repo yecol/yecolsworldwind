@@ -31,10 +31,13 @@ import cn.yecols.obj.Road;
 import cn.yecols.obj.Simulator;
 
 public class ManyDataLayerUtil {
-	private static RenderableLayer roadsLayer;
-	private static Image destinationImage;
+	//辅助图层类
+	
+	private static RenderableLayer roadsLayer;	//道路网容纳图层
+	private static Image destinationImage;		//终点小旗图示
 	
 	static void LoadStreetsDataLayer(Set<DefaultWeightedEdge> edgeset,WorldWindow wwd){
+		//将道路网模型中的“边”，通过Road对象，画到视图中。
 
 		roadsLayer=new RenderableLayer();
 		roadsLayer.setName("Roads Layer");
@@ -44,6 +47,7 @@ public class ManyDataLayerUtil {
 			roadsLayer.addRenderable(new Road((LatLon)e.getSource(),(LatLon)e.getTarget()));
 		}
 		
+		//插入该道路表现图层
 		LayerList layers = wwd.getModel().getLayers();
 		int compassPosition = 0;
 		for (Layer l : layers) {
@@ -56,16 +60,16 @@ public class ManyDataLayerUtil {
 		layers.add(compassPosition, roadsLayer);
 	}
 	
+	
+	
 	static void UpdateStreetsDataLayer(Set<DefaultWeightedEdge> edgeset,WorldWindow wwd){
 
-		
-		
+		//道路更新
 		roadsLayer=new RenderableLayer();
 		roadsLayer.setName("Roads Layer");
 		roadsLayer.setPickEnabled(false);
 	
 		for(DefaultWeightedEdge e:edgeset){
-			System.out.println("trans"+e.getTrans());
 			roadsLayer.addRenderable(new Road((LatLon)e.getSource(),(LatLon)e.getTarget()));
 		}
 		
@@ -83,6 +87,7 @@ public class ManyDataLayerUtil {
 	
 	
 	static void LoadSimulatorPath(Simulator simulator,WorldWindow wwd){
+		//通过path对象，载入最短路径的表现图层。并在终点标识小旗帜。
 		roadsLayer=new RenderableLayer();
 		roadsLayer.setName("Simulator Layer");
 		roadsLayer.setPickEnabled(false);
@@ -95,16 +100,17 @@ public class ManyDataLayerUtil {
 		try {
 			destinationImage=ImageIO.read(new File("src/cn/yecols/images/destination.png"));
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
+		//添加终点标示
 		SurfaceIcon surfaceIcon = new SurfaceIcon(destinationImage,simulator.getEnd());
 		surfaceIcon.setOpacity(1);
 		RenderableLayer destinationLayer=new RenderableLayer();
 		destinationLayer.setName("Destination Icon");
 		destinationLayer.addRenderable(surfaceIcon);
 		
+		//添加图层
 		LayerList layers=wwd.getModel().getLayers();
 		for(Layer l:layers){
 			if(l.getName().equals("Simulator Layer"))
@@ -116,6 +122,8 @@ public class ManyDataLayerUtil {
 	}
 	
 	static void LoadAirSpaceLayer(WorldWindow wwd){
+		//添加3D抽象模型
+		
 		AirspaceLayer airspaceLayer=new AirspaceLayer();
 		airspaceLayer.setName("AirSpace");
 		airspaceLayer.setPickEnabled(false);
@@ -182,6 +190,7 @@ public class ManyDataLayerUtil {
 	}
 	
 	public static RenderableLayer Emergency(int peopleNum){
+		//根据输入的模拟人群参数选择创建相应的疏散点标示图层
 		Emergency e=new Emergency();
 		if(peopleNum<=Emergency.busOnlySum){
 			return e.MakeLayerWithBusOnly();
@@ -226,9 +235,6 @@ public class ManyDataLayerUtil {
         
         return new Color(rgbInt);
     }
-    
-   // priva
-
 
 
 }

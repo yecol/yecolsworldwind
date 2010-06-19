@@ -21,40 +21,37 @@ public class LayerPanel extends JPanel
 
     public LayerPanel(WorldWindow wwd)
     {
-        // Make a panel at a default size.
         super(new BorderLayout());
         this.makePanel(wwd, new Dimension(200, 400));
     }
 
     public LayerPanel(WorldWindow wwd, Dimension size)
     {
-        // Make a panel at a specified size.
         super(new BorderLayout());
         this.makePanel(wwd, size);
     }
 
     private void makePanel(WorldWindow wwd, Dimension size)
     {
-        // Make and fill the panel holding the layer titles.
+        //生成图层面板控件
         this.layersPanel = new JPanel(new GridLayout(0, 1, 0, 4));
         this.layersPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         this.fill(wwd);
 
-        // Must put the layer grid in a container to prevent scroll panel from stretching their vertical spacing.
         JPanel dummyPanel = new JPanel(new BorderLayout());
         dummyPanel.add(this.layersPanel, BorderLayout.NORTH);
 
-        // Put the name panel in a scroll bar.
+        // 滚动轴面板
         this.scrollPane = new JScrollPane(dummyPanel);
         this.scrollPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         if (size != null)
             this.scrollPane.setPreferredSize(size);
 
-        // Add the scroll bar and name panel to a titled panel that will resize with the main window.
+        
         westPanel = new JPanel(new GridLayout(0, 1, 0, 10));
         westPanel.setBorder(
-            new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9), new TitledBorder("Layers")));
-        westPanel.setToolTipText("Layers to Show");
+            new CompoundBorder(BorderFactory.createEmptyBorder(9, 9, 9, 9), new TitledBorder("图层控制")));
+        westPanel.setToolTipText("控制图层显示与否");
         westPanel.add(scrollPane);
         this.add(westPanel, BorderLayout.CENTER);
 
@@ -84,7 +81,7 @@ public class LayerPanel extends JPanel
 
     private void fill(WorldWindow wwd)
     {
-        // Fill the layers panel with the titles of all layers in the world window's current model.
+        //通过当前wwd中Model的读取获得所有图层和名称
         for (Layer layer : wwd.getModel().getLayers())
         {
             LayerAction action = new LayerAction(layer, wwd, layer.isEnabled());
@@ -103,18 +100,13 @@ public class LayerPanel extends JPanel
 
     public void update(WorldWindow wwd)
     {
-        // Replace all the layer names in the layers panel with the names of the current layers.
+        //刷新图层名称
         this.layersPanel.removeAll();
         this.fill(wwd);
         this.westPanel.revalidate();
         this.westPanel.repaint();
     }
 
-    @Override
-    public void setToolTipText(String string)
-    {
-        this.scrollPane.setToolTipText(string);
-    }
 
     private static class LayerAction extends AbstractAction
     {
@@ -133,7 +125,7 @@ public class LayerPanel extends JPanel
 
         public void actionPerformed(ActionEvent actionEvent)
         {
-            // Simply enable or disable the layer based on its toggle button.
+            //使选择按钮与wwd中的图层显示与否相关联
             if (((JCheckBox) actionEvent.getSource()).isSelected())
                 this.layer.setEnabled(true);
             else

@@ -14,11 +14,11 @@ import java.util.TimerTask;
 import cn.yecols.obj.Simulator;
 
 public class SimulatorsTimerTask extends TimerTask{
-
-	private ArrayList<Simulator> simulators;
-	private WorldWindow wwd;
-	private RenderableLayer simulatorsLayer;
-	private static final Angle anglePitch=Angle.fromDegrees(0);
+	//模拟点的任务类 继承自TimerTask
+	private ArrayList<Simulator> simulators;		//模拟点对象
+	private WorldWindow wwd;						//wwd视图
+	private RenderableLayer simulatorsLayer;		//模拟点图层
+	private static final Angle anglePitch=Angle.fromDegrees(0); //俯角
 	
 	public SimulatorsTimerTask(WorldWindow wwd,ArrayList<Simulator> simulators) throws IOException{
 		this.simulators=simulators;
@@ -30,21 +30,22 @@ public class SimulatorsTimerTask extends TimerTask{
 	@Override
 	public void run() {
 		
+		//重新画出模拟点
 		simulatorsLayer.removeAllRenderables();
 		for(int i=0;i<simulators.size();i++){
-			simulators.get(i).compute();			
+			simulators.get(i).compute();	//计算位置		
 			simulatorsLayer.addRenderable(simulators.get(i));
 		}
 		
-		
+		//添加图层
 		LayerList layers = wwd.getModel().getLayers();
 		for (Layer l : layers) {
-			System.out.println(l.getName());
 			if (l.getName().equals("Simulators Layer"))
 				layers.remove(l);
 		}
 		layers.add(simulatorsLayer);
 		
+		//调整角度、高度、和俯角
 		wwd.getView().setEyePosition(new Position(simulators.get(0).getCurrent(),6000));
 		wwd.getView().setHeading(simulators.get(0).getHeading());
 		wwd.getView().setPitch(anglePitch);
