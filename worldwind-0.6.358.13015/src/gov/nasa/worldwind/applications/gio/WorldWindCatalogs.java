@@ -9,8 +9,8 @@ import gov.nasa.worldwind.Configuration;
 import gov.nasa.worldwind.applications.gio.catalogui.CatalogKey;
 import gov.nasa.worldwind.applications.gio.catalogui.SwingUtils;
 import gov.nasa.worldwind.avlist.AVKey;
-import gov.nasa.worldwind.examples.ApplicationTemplate;
-import gov.nasa.worldwind.examples.LayerPanel;
+import gov.nasa.worldwind.instances.ApplicationTemplate;
+import gov.nasa.worldwind.instances.LayerPanel;
 import gov.nasa.worldwind.util.Logging;
 
 import javax.swing.*;

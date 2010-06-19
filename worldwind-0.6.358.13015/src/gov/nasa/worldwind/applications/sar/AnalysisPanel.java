@@ -12,9 +12,9 @@ import gov.nasa.worldwind.util.*;
 import gov.nasa.worldwind.applications.sar.render.*;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.event.*;
-import gov.nasa.worldwind.examples.ApplicationTemplate;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.Globe;
+import gov.nasa.worldwind.instances.ApplicationTemplate;
 import gov.nasa.worldwind.layers.*;
 import gov.nasa.worldwind.view.orbit.*;
 

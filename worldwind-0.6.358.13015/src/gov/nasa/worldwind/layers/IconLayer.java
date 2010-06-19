@@ -27,6 +27,7 @@ public class IconLayer extends AbstractLayer
     private IconRenderer iconRenderer = new IconRenderer();
     private Pedestal pedestal;//基座，该类内部的IconRenderer使用。
 
+
     /** Creates a new <code>IconLayer</code> with an empty collection of Icons. */
     public IconLayer()
     {

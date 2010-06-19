@@ -7,8 +7,8 @@ package gov.nasa.worldwind.examples.view;
 import gov.nasa.worldwind.*;
 import gov.nasa.worldwind.awt.ViewInputHandler;
 import gov.nasa.worldwind.event.*;
-import gov.nasa.worldwind.examples.*;
 import gov.nasa.worldwind.geom.*;
+import gov.nasa.worldwind.instances.*;
 import gov.nasa.worldwind.util.Logging;
 
 import javax.swing.*;

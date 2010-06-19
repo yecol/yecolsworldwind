@@ -6,9 +6,9 @@ package gov.nasa.worldwind.examples.analytics;
 
 import gov.nasa.worldwind.avlist.*;
 import gov.nasa.worldwind.data.BufferWrapperRaster;
-import gov.nasa.worldwind.examples.ApplicationTemplate;
 import gov.nasa.worldwind.formats.worldfile.WorldFile;
 import gov.nasa.worldwind.geom.*;
+import gov.nasa.worldwind.instances.ApplicationTemplate;
 import gov.nasa.worldwind.layers.RenderableLayer;
 import gov.nasa.worldwind.render.*;
 import gov.nasa.worldwind.util.*;

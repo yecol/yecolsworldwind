@@ -5,8 +5,8 @@ All Rights Reserved.
 package gov.nasa.worldwind.examples.view;
 
 import gov.nasa.worldwind.WorldWindow;
-import gov.nasa.worldwind.examples.ApplicationTemplate;
 import gov.nasa.worldwind.geom.Angle;
+import gov.nasa.worldwind.instances.ApplicationTemplate;
 import gov.nasa.worldwind.view.firstperson.*;
 
 /**

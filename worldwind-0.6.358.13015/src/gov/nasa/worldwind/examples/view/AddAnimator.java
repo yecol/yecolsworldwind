@@ -6,8 +6,8 @@ package gov.nasa.worldwind.examples.view;
 
 import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.avlist.AVKey;
-import gov.nasa.worldwind.examples.*;
 import gov.nasa.worldwind.geom.Position;
+import gov.nasa.worldwind.instances.*;
 import gov.nasa.worldwind.poi.PointOfInterest;
 import gov.nasa.worldwind.view.firstperson.*;
 

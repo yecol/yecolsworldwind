@@ -8,8 +8,8 @@ All Rights Reserved.
 package gov.nasa.worldwind.applications.glider;
 
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
-import gov.nasa.worldwind.examples.ApplicationTemplate;
 import gov.nasa.worldwind.geom.*;
+import gov.nasa.worldwind.instances.ApplicationTemplate;
 import gov.nasa.worldwind.util.*;
 
 import javax.imageio.ImageIO;

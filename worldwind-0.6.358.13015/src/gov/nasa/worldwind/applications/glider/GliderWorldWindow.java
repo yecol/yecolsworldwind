@@ -9,7 +9,7 @@ package gov.nasa.worldwind.applications.glider;
 
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
-import gov.nasa.worldwind.examples.ApplicationTemplate;
+import gov.nasa.worldwind.instances.ApplicationTemplate;
 import gov.nasa.worldwind.layers.Layer;
 import gov.nasa.worldwind.util.Logging;
 

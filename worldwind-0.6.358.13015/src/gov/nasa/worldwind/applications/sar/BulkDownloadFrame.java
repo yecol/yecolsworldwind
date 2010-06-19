@@ -1,7 +1,7 @@
 package gov.nasa.worldwind.applications.sar;
 
 import gov.nasa.worldwind.WorldWindow;
-import gov.nasa.worldwind.examples.BulkDownloadPanel;
+import gov.nasa.worldwind.instances.BulkDownloadPanel;
 
 import javax.swing.*;
 import java.awt.event.*;
