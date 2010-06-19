@@ -82,7 +82,7 @@ import java.util.List;
  * <p>Events will also be fired at the start and end of a rubber band operation during shape creation: {@link
  * #EVENT_RUBBERBAND_START} and {@link #EVENT_RUBBERBAND_STOP}.</p>
  *
- * <p>See {@link gov.nasa.worldwind.examples.MeasureToolPanel} for some events usage.</p>
+ * <p>See {@link gov.nasa.worldwind.instances.MeasureToolPanel} for some events usage.</p>
  *
  * <p>Several instances of this class can be used simultaneously. However, each instance should be disposed of after
  * usage by calling the {@link #dispose()} method.</p>

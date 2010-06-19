@@ -9,7 +9,7 @@ import gov.nasa.worldwind.WorldWindow;
 import gov.nasa.worldwind.applications.gio.GIDBCatalogPanel;
 import gov.nasa.worldwind.applications.gio.catalogui.*;
 import gov.nasa.worldwind.avlist.*;
-import gov.nasa.worldwind.examples.ApplicationTemplate;
+import gov.nasa.worldwind.instances.ApplicationTemplate;
 import gov.nasa.worldwind.util.BrowserOpener;
 import gov.nasa.worldwind.util.Logging;
 import gov.nasa.worldwind.wms.*;

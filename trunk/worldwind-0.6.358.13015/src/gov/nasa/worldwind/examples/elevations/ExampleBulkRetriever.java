@@ -7,9 +7,9 @@ All Rights Reserved.
 package gov.nasa.worldwind.examples.elevations;
 
 import gov.nasa.worldwind.awt.WorldWindowGLCanvas;
-import gov.nasa.worldwind.examples.*;
 import gov.nasa.worldwind.geom.*;
 import gov.nasa.worldwind.globes.ElevationModel;
+import gov.nasa.worldwind.instances.*;
 import gov.nasa.worldwind.retrieve.BulkRetrievalThread;
 import gov.nasa.worldwind.terrain.*;
 import gov.nasa.worldwind.util.Logging;
