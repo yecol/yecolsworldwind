@@ -21,17 +21,18 @@ public class StreetsDataReader {
 	private static File file;
 	private static WorldWindow wwd;
 	private static DocumentBuilder builder;
-	private static WeightedGraph<LatLon, DefaultWeightedEdge> streetsGraph;
-	private LatLon beginPosition, endPosition;
-	private boolean tar;
-	private LengthMeasurer lengthMeasurer;
+	private static WeightedGraph<LatLon, DefaultWeightedEdge> streetsGraph;		// 街道网
+	private LatLon beginPosition, endPosition;									//街道的起始点和终止点
+	private boolean tar;														//是否为线路起点的标示
+	private LengthMeasurer lengthMeasurer;										//长度测量工具
 
 	public StreetsDataReader(WorldWindow wwd) {
-		file = new File("src/cn/yecols/geoHz.xml");
-		this.wwd=wwd;
-		streetsGraph = new SimpleWeightedGraph(DefaultWeightedEdge.class);
+		//初始化函数
+		file = new File("src/cn/yecols/geoHz.xml");//道路描述文件
+		this.wwd = wwd;
+		streetsGraph = new SimpleWeightedGraph(DefaultWeightedEdge.class);//创建一张新图
 		lengthMeasurer = new LengthMeasurer();
-		lengthMeasurer.setFollowTerrain(true);
+		lengthMeasurer.setFollowTerrain(true);//设置测量路长时沿地表起伏
 	}
 
 	public WeightedGraph ReadStreetsData() throws SAXException, IOException {
@@ -52,6 +53,7 @@ public class StreetsDataReader {
 				tar = false;
 				// 对应一个<path>
 				MeasureTool measureTool = new MeasureTool(wwd);
+				//重新初始化一个测量工具，以测量路长作为路线的权重
 				measureTool.setController(new MeasureToolController());
 				measureTool.setFollowTerrain(true);
 				measureTool.setMeasureShapeType(MeasureTool.SHAPE_PATH);
@@ -64,6 +66,7 @@ public class StreetsDataReader {
 					for (int j = 0; j < points.getLength(); j++) {
 						if (points.item(j) instanceof Element) {
 							if (tar == false) {
+								//当tar为假，说明是一条线路的起始点。
 								beginPosition = new LatLon(Double
 										.parseDouble(((Element) points.item(j))
 												.getAttribute("lat")), Double
@@ -74,6 +77,7 @@ public class StreetsDataReader {
 								measureTool.addControlPoint(beginPosition);
 								// measureTool.
 							} else {
+								//否则说明是一条线路的中间控制点。
 								endPosition = new LatLon(Double
 										.parseDouble(((Element) points.item(j))
 												.getAttribute("lat")), Double
@@ -86,12 +90,9 @@ public class StreetsDataReader {
 
 								lengthMeasurer.addLine(beginPosition,
 										endPosition);
-								
 
-								System.out.println(lengthMeasurer
-										.computeLength(wwd.getModel()
-												.getGlobe(), true));
 								try {
+								//将街道添加到图，并设置路长作为权重。
 									streetsGraph.setEdgeWeight(
 											streetsGraph.addEdge(beginPosition,
 													endPosition),
@@ -104,11 +105,6 @@ public class StreetsDataReader {
 								beginPosition = endPosition;
 
 							}
-
-							System.out.println(((Element) points.item(j))
-									.getAttribute("lat"));
-							System.out.println(((Element) points.item(j))
-									.getAttribute("lon"));
 
 						}
 					}

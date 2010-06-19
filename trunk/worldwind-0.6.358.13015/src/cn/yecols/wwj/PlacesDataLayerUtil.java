@@ -27,6 +27,7 @@ import gov.nasa.worldwind.render.ScreenImage;
 import gov.nasa.worldwind.render.SurfaceIcon;
 
 public class PlacesDataLayerUtil {
+	//景点标示图层
 	private ArrayList<Place> places;
 	private RenderableLayer placesDataLayer;
 	private static Image placeImage;
@@ -44,6 +45,7 @@ public class PlacesDataLayerUtil {
 		Initiation();
 	}
 	
+	//初始化景点数组
 	public void Initiation(){
 		places.add(new Place("西溪访梅", new LatLon(30.2633, 120.0785), "西溪湿地国家公园，位于浙江省杭州市区<br>西部，距西湖不到5公里，是罕见的城中<br>次生湿地。这里生态资源丰富、自然景观<br>质朴、文化积淀深厚，曾与西湖、西泠并称<br>杭州“三西”，是目前国内第一个也是唯<br>一的集城市湿地、农耕湿地、文化湿地于<br>一体的国家湿地公园。",placeImage));
 		places.add(new Place("苏堤春晓", new LatLon(30.2390, 120.1356), "北宋元祐五年(1090)，诗人苏轼(东坡)任<br>杭州知州时，疏浚西湖，利用浚挖的淤<br>泥构筑并历经杭州西湖后世演变而形成的，<br>杭州人民为纪念苏东坡治理西湖的功绩，<br>把它命名为苏堤。",placeImage));
@@ -67,6 +69,7 @@ public class PlacesDataLayerUtil {
 		
 	}
 	
+	//显示在视图上
 	public void Visualize(WorldWindow wwd){
 		wwd.getModel().getLayers().add(placesDataLayer);
 		
@@ -77,6 +80,7 @@ public class PlacesDataLayerUtil {
 		return places.get(index);
 	}
 	
+	
 	public RenderableLayer MakePlacesLayerWithAnnnotation(){
 		placesDataLayer.removeAllRenderables();
 		for(Place p:places){
@@ -85,6 +89,7 @@ public class PlacesDataLayerUtil {
 		return placesDataLayer;
 	}
 	
+	//为所有景点添加标注
 	public RenderableLayer MakePlacesLayerWithMarker() throws IOException{
 		placesDataLayer.removeAllRenderables();
 		for(Place p:places){
@@ -95,7 +100,7 @@ public class PlacesDataLayerUtil {
 	}
 	
 	
-	
+	//添加标注
 	public Renderable MakePlaceMarker(Place p) throws IOException {
 		// TODO Auto-generated method stub
 		final SurfaceIcon surfaceIcon = new SurfaceIcon(placeImage,p.getPlaceLocation());
@@ -111,6 +116,7 @@ public class PlacesDataLayerUtil {
 	}
 
 
+	//属性标注的显示
 	public GlobeAnnotation MakePlaceAnnotation(Place place) {
 		GlobeAnnotation ga = new AnnotationShadow(
 				"<p>\n<b><font color=\"#664400\">" + place.getPlaceName()
